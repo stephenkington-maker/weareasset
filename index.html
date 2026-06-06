@@ -114,10 +114,17 @@
   }
 
   .hero-img {
-    position: absolute; inset: 0; z-index: 0;
+    position: absolute; inset: -8%; z-index: 0;
     background: url('hero-bg.png') center center / cover no-repeat;
     transform-origin: center;
-    transition: transform 0.1s linear;
+    animation: heroWarp 18s ease-in-out infinite;
+  }
+  @keyframes heroWarp {
+    0%   { transform: scale(1.08) translate(0%, 0%)     rotate(0deg);    filter: brightness(1)    hue-rotate(0deg); }
+    25%  { transform: scale(1.13) translate(1.5%, 1%)   rotate(0.4deg);  filter: brightness(1.08) hue-rotate(8deg); }
+    50%  { transform: scale(1.1)  translate(-1%, 2%)    rotate(-0.3deg); filter: brightness(0.95) hue-rotate(-6deg); }
+    75%  { transform: scale(1.14) translate(-1.5%, -1%) rotate(0.2deg);  filter: brightness(1.05) hue-rotate(5deg); }
+    100% { transform: scale(1.08) translate(0%, 0%)     rotate(0deg);    filter: brightness(1)    hue-rotate(0deg); }
   }
   .hero-img-overlay {
     position: absolute; inset: 0; z-index: 1;
@@ -1031,17 +1038,13 @@
   });
 
   // HERO PARALLAX
-  const heroImg=document.getElementById('hero-img');
   const heroHL=document.querySelector('.hero-headline');
   const heroSub=document.querySelector('.hero-sub');
   window.addEventListener('scroll',()=>{
     const sy=window.scrollY;
-    if(heroImg) heroImg.style.transform=`scale(1.08) translateY(${sy*0.25}px)`;
     if(heroHL) heroHL.style.transform=`translateY(${sy*0.12}px)`;
     if(heroSub) heroSub.style.transform=`translateY(${sy*0.08}px)`;
   },{passive:true});
-  // init scale so parallax has room
-  if(heroImg) heroImg.style.transform='scale(1.08) translateY(0px)';
 
   // FORM
   // Serverless API — sends email to info@weareasset.co.uk via Gmail
