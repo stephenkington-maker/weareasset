@@ -136,6 +136,10 @@
     position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px);
   }
+  #particles-canvas {
+    position: absolute; inset: 0; z-index: 3;
+    pointer-events: none; width: 100%; height: 100%;
+  }
 
   .hero-eyebrow {
     position: relative; z-index: 3;
@@ -592,6 +596,7 @@
   <div class="hero-img" id="hero-img"></div>
   <div class="hero-img-overlay"></div>
   <div class="hero-scanlines"></div>
+  <canvas id="particles-canvas"></canvas>
 
   <p class="hero-eyebrow">Premium Design Studio — Est. 2019</p>
 
@@ -1103,6 +1108,61 @@
       setTimeout(() => { btn.textContent = 'Send Inquiry →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
     });
   });
+
+  // PARTICLES
+  (function() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+    const COUNT = 80;
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+
+    function createParticle() {
+      return {
+        x: rand(0, W),
+        y: rand(0, H),
+        r: rand(0.4, 1.6),
+        vx: rand(-0.12, 0.12),
+        vy: rand(-0.18, -0.04),
+        alpha: rand(0.1, 0.55),
+        alphaDir: rand(0.001, 0.003),
+        color: Math.random() > 0.6 ? '255,45,155' : Math.random() > 0.5 ? '0,212,232' : '240,236,255'
+      };
+    }
+
+    for (let i = 0; i < COUNT; i++) particles.push(createParticle());
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        // drift
+        p.x += p.vx;
+        p.y += p.vy;
+        // fade in/out
+        p.alpha += p.alphaDir;
+        if (p.alpha >= 0.55 || p.alpha <= 0.05) p.alphaDir *= -1;
+        // wrap
+        if (p.y < -4) { p.y = H + 4; p.x = rand(0, W); }
+        if (p.x < -4) p.x = W + 4;
+        if (p.x > W + 4) p.x = -4;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color},${p.alpha.toFixed(3)})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
 
   // MOBILE MENU
   const menuBtn=document.getElementById('menu-btn');
