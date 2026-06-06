@@ -1044,9 +1044,8 @@
   if(heroImg) heroImg.style.transform='scale(1.08) translateY(0px)';
 
   // FORM
-  // Formspree — delivers to info@weareasset.co.uk
+  // Mailto — no third party, sends directly to info@weareasset.co.uk
   document.getElementById('form-submit').addEventListener('click', function() {
-    const btn = this;
     const name    = document.getElementById('f-name').value.trim();
     const email   = document.getElementById('f-email').value.trim();
     const company = document.getElementById('f-company').value.trim();
@@ -1054,7 +1053,7 @@
     const budget  = document.getElementById('f-budget').value;
     const message = document.getElementById('f-message').value.trim();
 
-    // Basic validation
+    // Validation
     let valid = true;
     ['f-name','f-email','f-message'].forEach(id => {
       const el = document.getElementById(id);
@@ -1063,58 +1062,34 @@
     });
     if (!valid) return;
 
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
+    const subject = encodeURIComponent('New Project Inquiry — ASSET Studio');
+    const body = encodeURIComponent(
+`Name: ${name}
+Email: ${email}
+Company: ${company || 'Not provided'}
+Service: ${service || 'Not specified'}
+Budget: ${budget || 'Not specified'}
 
-    fetch('https://formspree.io/f/xwearasset', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        company:  company || 'Not provided',
-        service:  service || 'Not specified',
-        budget:   budget  || 'Not specified',
-        message,
-        _replyto: email,
-        _subject: 'New Project Inquiry — ASSET Studio'
-      })
-    })
-    .then(r => r.json())
-    .then(data => {
-      if (data.ok || data.next) {
-        btn.textContent = 'Message Sent ✓';
-        btn.style.background = 'rgba(255,45,155,0.2)';
-        btn.style.color = 'var(--pink)';
-        btn.style.opacity = '1';
-        ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('f-service').selectedIndex = 0;
-        document.getElementById('f-budget').selectedIndex  = 0;
-        setTimeout(() => {
-          btn.textContent = 'Send Inquiry →';
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.disabled = false;
-          closeC();
-        }, 2500);
-      } else {
-        throw new Error(data.error || 'Unknown error');
-      }
-    })
-    .catch(err => {
-      console.error('Form error:', err);
-      btn.textContent = 'Failed — Try Again';
-      btn.style.background = 'rgba(255,80,80,0.2)';
-      btn.style.color = '#ff5555';
-      btn.style.opacity = '1';
-      btn.disabled = false;
-      setTimeout(() => {
-        btn.textContent = 'Send Inquiry →';
-        btn.style.background = '';
-        btn.style.color = '';
-      }, 3000);
-    });
+Message:
+${message}`
+    );
+
+    window.location.href = `mailto:info@weareasset.co.uk?subject=${subject}&body=${body}`;
+
+    // Visual feedback
+    const btn = this;
+    btn.textContent = 'Opening Email Client ✓';
+    btn.style.background = 'rgba(255,45,155,0.2)';
+    btn.style.color = 'var(--pink)';
+    ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-service').selectedIndex = 0;
+    document.getElementById('f-budget').selectedIndex  = 0;
+    setTimeout(() => {
+      btn.textContent = 'Send Inquiry →';
+      btn.style.background = '';
+      btn.style.color = '';
+      closeC();
+    }, 2500);
   });
 
   // MOBILE MENU
