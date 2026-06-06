@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     service: 'gmail',
     auth: {
       user: 'stephenkington@gmail.com',
-      pass: 'acfkinoktrhs zbrq'
+      pass: 'acfkinoktrhs zbrq'.replace(/\s/g, '')
     }
   });
 
@@ -51,6 +51,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Mail error:', err);
-    return res.status(500).json({ error: 'Failed to send email' });
+    return res.status(500).json({ error: err.message });
   }
 }
