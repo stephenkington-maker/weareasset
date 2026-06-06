@@ -172,15 +172,25 @@
   .hero-headline .line:nth-child(2) span { animation-delay: 0.7s; }
   .hero-headline .line:nth-child(3) span { animation-delay: 0.85s; }
   .hero-headline .grad {
-    background: linear-gradient(90deg, var(--pink) 0%, var(--magenta) 30%, var(--cyan) 55%, var(--pink) 80%, var(--magenta) 100%);
-    background-size: 200% auto;
+    background: linear-gradient(90deg,
+      #ff2d9b 0%,
+      #ff2d9b 10%,
+      #e020c8 25%,
+      #00d4e8 45%,
+      #ffffff 55%,
+      #00d4e8 65%,
+      #e020c8 80%,
+      #ff2d9b 90%,
+      #ff2d9b 100%
+    );
+    background-size: 300% auto;
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    filter: drop-shadow(0 0 30px rgba(255,45,155,0.4));
-    animation: gradientShift 4s linear infinite;
+    filter: drop-shadow(0 0 40px rgba(255,45,155,0.6)) drop-shadow(0 0 80px rgba(255,45,155,0.3));
+    animation: gradientShift 3s linear infinite;
   }
   @keyframes gradientShift {
     0%   { background-position: 0% center; }
-    100% { background-position: 200% center; }
+    100% { background-position: 300% center; }
   }
 
   .hero-sub {
