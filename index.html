@@ -973,12 +973,12 @@
     <button class="contact-close" id="close-contact">✕</button>
     <p class="contact-eye">New Project Inquiry</p>
     <h2 class="contact-title">LET'S CREATE SOMETHING REMARKABLE.</h2>
-    <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Alex Johnson"></div>
-    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="alex@company.com"></div>
-    <div class="form-group"><label class="form-label">Company / Brand</label><input type="text" class="form-input" placeholder="Acme Inc."></div>
-    <div class="form-group"><label class="form-label">Service Needed</label><select class="form-select"><option value="">Select a service</option><option>Graphic Design</option><option>AI Ad Design</option><option>Website UI Design</option><option>Full Brand Package</option></select></div>
-    <div class="form-group"><label class="form-label">Project Budget</label><select class="form-select"><option value="">Approximate budget</option><option>£5,000 – £10,000</option><option>£10,000 – £25,000</option><option>£25,000 – £50,000</option><option>£50,000+</option></select></div>
-    <div class="form-group"><label class="form-label">Tell us about your project</label><textarea class="form-textarea" placeholder="What are you building, and what challenge are you trying to solve?"></textarea></div>
+    <div class="form-group"><label class="form-label">Your Name</label><input type="text" id="f-name" class="form-input" placeholder="Alex Johnson"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" id="f-email" class="form-input" placeholder="alex@company.com"></div>
+    <div class="form-group"><label class="form-label">Company / Brand</label><input type="text" id="f-company" class="form-input" placeholder="Acme Inc."></div>
+    <div class="form-group"><label class="form-label">Service Needed</label><select id="f-service" class="form-select"><option value="">Select a service</option><option>Graphic Design</option><option>AI Ad Design</option><option>Website UI Design</option><option>Full Brand Package</option></select></div>
+    <div class="form-group"><label class="form-label">Project Budget</label><select id="f-budget" class="form-select"><option value="">Approximate budget</option><option>£5,000 – £10,000</option><option>£10,000 – £25,000</option><option>£25,000 – £50,000</option><option>£50,000+</option></select></div>
+    <div class="form-group"><label class="form-label">Tell us about your project</label><textarea id="f-message" class="form-textarea" placeholder="What are you building, and what challenge are you trying to solve?"></textarea></div>
     <button class="form-submit" id="form-submit">Send Inquiry →</button>
   </div>
 </div>
@@ -1044,11 +1044,71 @@
   if(heroImg) heroImg.style.transform='scale(1.08) translateY(0px)';
 
   // FORM
-  document.getElementById('form-submit').addEventListener('click',function(){
-    this.textContent='Message Sent ✓';
-    this.style.background='rgba(255,45,155,0.2)';
-    this.style.color='var(--pink)';
-    setTimeout(()=>{this.textContent='Send Inquiry →';this.style.background='';this.style.color='';closeC();},2200);
+  // EmailJS — sends to info@weareasset.co.uk
+  // Service ID, Template ID and Public Key are set up on emailjs.com
+  const EMAILJS_SERVICE  = 'service_weareasset';
+  const EMAILJS_TEMPLATE = 'template_weareasset';
+  const EMAILJS_KEY      = 'YOUR_EMAILJS_PUBLIC_KEY'; // replace after EmailJS setup
+
+  document.getElementById('form-submit').addEventListener('click', function() {
+    const btn = this;
+    const name    = document.getElementById('f-name').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const company = document.getElementById('f-company').value.trim();
+    const service = document.getElementById('f-service').value;
+    const budget  = document.getElementById('f-budget').value;
+    const message = document.getElementById('f-message').value.trim();
+
+    if (!name || !email || !message) {
+      document.getElementById('f-name').style.borderColor   = !name    ? 'var(--pink)' : '';
+      document.getElementById('f-email').style.borderColor  = !email   ? 'var(--pink)' : '';
+      document.getElementById('f-message').style.borderColor= !message ? 'var(--pink)' : '';
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+      from_name:    name,
+      from_email:   email,
+      company:      company || 'Not provided',
+      service:      service || 'Not specified',
+      budget:       budget  || 'Not specified',
+      message:      message,
+      to_email:     'info@weareasset.co.uk'
+    }, EMAILJS_KEY)
+    .then(() => {
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = 'rgba(255,45,155,0.2)';
+      btn.style.color = 'var(--pink)';
+      btn.style.opacity = '1';
+      // Clear fields
+      ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-service').selectedIndex = 0;
+      document.getElementById('f-budget').selectedIndex  = 0;
+      setTimeout(() => {
+        btn.textContent = 'Send Inquiry →';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+        closeC();
+      }, 2500);
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      btn.textContent = 'Failed — Try Again';
+      btn.style.background = 'rgba(255,80,80,0.2)';
+      btn.style.color = '#ff5555';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'Send Inquiry →';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 3000);
+    });
   });
 
   // MOBILE MENU
@@ -1068,5 +1128,6 @@
     menuBtn.children[1].style.transform=mOpen?'rotate(-45deg) translate(4px,-4px)':'';
   });
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 </html>
