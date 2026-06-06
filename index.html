@@ -1044,8 +1044,9 @@
   if(heroImg) heroImg.style.transform='scale(1.08) translateY(0px)';
 
   // FORM
-  // Mailto — no third party, sends directly to info@weareasset.co.uk
+  // Serverless API — sends email to info@weareasset.co.uk via Gmail
   document.getElementById('form-submit').addEventListener('click', function() {
+    const btn = this;
     const name    = document.getElementById('f-name').value.trim();
     const email   = document.getElementById('f-email').value.trim();
     const company = document.getElementById('f-company').value.trim();
@@ -1062,34 +1063,42 @@
     });
     if (!valid) return;
 
-    const subject = encodeURIComponent('New Project Inquiry — ASSET Studio');
-    const body = encodeURIComponent(
-`Name: ${name}
-Email: ${email}
-Company: ${company || 'Not provided'}
-Service: ${service || 'Not specified'}
-Budget: ${budget || 'Not specified'}
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
 
-Message:
-${message}`
-    );
-
-    const a = document.createElement('a'); a.href = `mailto:info@weareasset.co.uk?subject=${subject}&body=${body}`; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
-
-    // Visual feedback
-    const btn = this;
-    btn.textContent = 'Opening Email Client ✓';
-    btn.style.background = 'rgba(255,45,155,0.2)';
-    btn.style.color = 'var(--pink)';
-    ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('f-service').selectedIndex = 0;
-    document.getElementById('f-budget').selectedIndex  = 0;
-    setTimeout(() => {
-      btn.textContent = 'Send Inquiry →';
-      btn.style.background = '';
-      btn.style.color = '';
-      closeC();
-    }, 2500);
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, company, service, budget, message })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok) {
+        btn.textContent = 'Message Sent ✓';
+        btn.style.background = 'rgba(255,45,155,0.2)';
+        btn.style.color = 'var(--pink)';
+        btn.style.opacity = '1';
+        ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('f-service').selectedIndex = 0;
+        document.getElementById('f-budget').selectedIndex  = 0;
+        setTimeout(() => {
+          btn.textContent = 'Send Inquiry →';
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.disabled = false;
+          closeC();
+        }, 2500);
+      } else { throw new Error(data.error); }
+    })
+    .catch(() => {
+      btn.textContent = 'Failed — Try Again';
+      btn.style.background = 'rgba(255,80,80,0.2)';
+      btn.style.color = '#ff5555';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Send Inquiry →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    });
   });
 
   // MOBILE MENU
