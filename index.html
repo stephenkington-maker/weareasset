@@ -177,29 +177,30 @@
   .hero-headline .grad {
     display: inline-block;
     background: linear-gradient(90deg,
-      #e020c8 0%,
-      #ff2d9b 15%,
-      #00d4e8 35%,
-      #7b2fff 50%,
-      #00d4e8 65%,
-      #ff2d9b 80%,
-      #e020c8 100%
+      #e020c8,
+      #ff2d9b,
+      #00d4e8,
+      #7b2fff,
+      #00d4e8,
+      #ff2d9b,
+      #e020c8,
+      #ff2d9b,
+      #00d4e8,
+      #7b2fff,
+      #00d4e8,
+      #ff2d9b,
+      #e020c8
     );
-    background-size: 250% auto;
+    background-size: 400% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    animation: gradientShift 2.2s linear infinite;
-    -webkit-animation: gradientShift 2.2s linear infinite;
+    animation: gradPan 3s linear infinite;
   }
-  @keyframes gradientShift {
-    0%   { background-position: 0% center; }
-    100% { background-position: 250% center; }
-  }
-  @-webkit-keyframes gradientShift {
-    0%   { background-position: 0% center; }
-    100% { background-position: 250% center; }
+  @keyframes gradPan {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 100% 0%; }
   }
 
   .hero-sub {
