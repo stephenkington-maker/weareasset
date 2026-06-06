@@ -338,16 +338,50 @@
   .service-card:hover .service-arrow { border-color: var(--pink); background: var(--pink-dim); transform: rotate(45deg); }
 
   /* WORK */
-  #work { padding: 140px 48px; max-width: 1440px; margin: 0 auto; }
-  .work-header { margin-bottom: 72px; }
-  .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-  .case-item { position: relative; overflow: hidden; background: var(--surface); cursor: none; }
-  .case-item:nth-child(1) { grid-column: 1 / 3; aspect-ratio: 16/6; }
-  .case-item:nth-child(2), .case-item:nth-child(3) { aspect-ratio: 4/3; }
-  .case-item:nth-child(4) { grid-column: 1 / 3; aspect-ratio: 16/6; }
+  #work { padding: 140px 0 140px 48px; max-width: 100%; overflow: hidden; }
+  .work-header { margin-bottom: 72px; padding-right: 48px; max-width: 1440px; }
+  /* CAROUSEL */
+  .carousel-wrap { position: relative; }
+  .carousel-track-outer { overflow: hidden; }
+  .carousel-track {
+    display: flex; gap: 3px;
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  .case-item {
+    position: relative; overflow: hidden; background: var(--surface); cursor: none;
+    flex: 0 0 75vw; max-width: 1100px; aspect-ratio: 16/7;
+  }
+  .case-item.small { flex: 0 0 38vw; max-width: 560px; aspect-ratio: 4/3; }
   .case-visual { width: 100%; height: 100%; transition: transform 0.7s var(--ease); }
   .case-item:hover .case-visual { transform: scale(1.04); }
   .case-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  /* NAV ARROWS */
+  .carousel-nav {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 40px; padding-right: 48px;
+    justify-content: flex-end;
+  }
+  .carousel-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 1px solid var(--border-v);
+    background: none; color: var(--white-dim);
+    font-size: 18px; cursor: none;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s var(--ease);
+  }
+  .carousel-btn:hover { border-color: var(--pink); background: var(--pink-dim); color: var(--pink); transform: scale(1.08); }
+  .carousel-btn:disabled { opacity: 0.25; pointer-events: none; }
+  .carousel-dots {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 0; margin-right: auto; padding-left: 48px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border-v); cursor: none;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .carousel-dot.active { background: var(--pink); transform: scale(1.4); }
 
   /* Case visuals */
   .case-1 { background: linear-gradient(135deg, #060210 0%, #120820 50%, #0a0418 100%); }
@@ -434,6 +468,9 @@
     border: 1px solid var(--border-v); border-radius: 1px;
     background: rgba(6,4,15,0.6); backdrop-filter: blur(8px);
   }
+  /* drag cursor on carousel */
+  .carousel-track-outer { cursor: grab; }
+  .carousel-track-outer.dragging { cursor: grabbing; }
 
   /* STATEMENT */
   #statement {
@@ -556,8 +593,8 @@
   /* MOBILE */
   @media (max-width: 1024px) {
     .services-grid, .testi-grid { grid-template-columns: 1fr; }
-    .case-grid { grid-template-columns: 1fr; }
-    .case-item:nth-child(1), .case-item:nth-child(4) { grid-column: 1; aspect-ratio: 4/3; }
+    .case-item { flex: 0 0 90vw; }
+    .case-item.small { flex: 0 0 80vw; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     footer { grid-template-columns: 1fr 1fr; }
     .footer-brand { grid-column: 1 / 3; }
@@ -790,139 +827,166 @@
     <p class="section-tag">Selected Work</p>
     <h2 class="section-title">PROJECTS WE'RE<br>PROUD TO SHOW.</h2>
   </div>
-  <div class="case-grid reveal">
-    <!-- Case 1 -->
-    <div class="case-item">
-      <div class="case-visual">
-        <div class="case-bg case-1">
-          <div class="case-1-big">MERIDIAN</div>
-          <div class="case-1-shapes">
-            <div class="case-1-shape s1"></div>
-            <div class="case-1-shape s2"></div>
-            <div class="case-1-shape s3"></div>
-          </div>
-          <div class="case-1-center">
-            <div class="case-1-badge-outer">
-              <div class="case-1-badge-inner">
-                <div class="case-1-badge-text">Brand<br>Identity<br>2024</div>
+
+  <div class="carousel-wrap reveal">
+    <div class="carousel-track-outer" id="carousel-outer">
+      <div class="carousel-track" id="carousel-track">
+
+        <!-- Slide 1 — Brand Identity -->
+        <div class="case-item">
+          <div class="case-visual">
+            <div class="case-bg case-1">
+              <div class="case-1-big">MERIDIAN</div>
+              <div class="case-1-shapes">
+                <div class="case-1-shape s1"></div>
+                <div class="case-1-shape s2"></div>
+                <div class="case-1-shape s3"></div>
+              </div>
+              <div class="case-1-center">
+                <div class="case-1-badge-outer"><div class="case-1-badge-inner"><div class="case-1-badge-text">Brand<br>Identity<br>2024</div></div></div>
               </div>
             </div>
+          </div>
+          <span class="case-label">Graphic Design</span>
+          <div class="case-overlay">
+            <p class="case-client">Meridian Capital</p>
+            <h3 class="case-title">A complete brand overhaul for a $2B fintech firm entering consumer markets.</h3>
           </div>
         </div>
-      </div>
-      <span class="case-label">Graphic Design</span>
-      <div class="case-overlay">
-        <p class="case-client">Meridian Capital</p>
-        <h3 class="case-title">A complete brand overhaul for a $2B fintech firm entering consumer markets.</h3>
-      </div>
-    </div>
-    <!-- Case 2 -->
-    <div class="case-item">
-      <div class="case-visual">
-        <div class="case-bg case-2">
-          <div class="case-2-inner">
-            <div class="case-2-phone">
-              <div class="case-2-glow"></div>
-              <div class="case-2-screen">
-                <div class="ph-bar pk"></div>
-                <div class="ph-bar"></div>
-                <div class="ph-bar cy"></div>
-                <div class="ph-chip"></div>
-                <div class="ph-grid">
-                  <div class="ph-block"></div>
-                  <div class="ph-block"></div>
+
+        <!-- Slide 2 — UI Design -->
+        <div class="case-item small">
+          <div class="case-visual">
+            <div class="case-bg case-2">
+              <div class="case-2-inner">
+                <div class="case-2-phone">
+                  <div class="case-2-glow"></div>
+                  <div class="case-2-screen">
+                    <div class="ph-bar pk"></div><div class="ph-bar"></div><div class="ph-bar cy"></div>
+                    <div class="ph-chip"></div>
+                    <div class="ph-grid"><div class="ph-block"></div><div class="ph-block"></div></div>
+                  </div>
                 </div>
-                <div class="ph-bar" style="margin-top:8px;width:30%"></div>
-              </div>
-            </div>
-            <div class="case-2-phone second">
-              <div class="case-2-screen">
-                <div class="ph-bar cy"></div>
-                <div class="ph-bar"></div>
-                <div class="ph-chip" style="background:rgba(0,212,232,0.1);border-color:rgba(0,212,232,0.2)"></div>
-                <div class="ph-grid">
-                  <div class="ph-block"></div>
-                  <div class="ph-block"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span class="case-label">UI Design</span>
-      <div class="case-overlay">
-        <p class="case-client">Orbit Analytics</p>
-        <h3 class="case-title">Mobile-first SaaS dashboard for a Series A analytics startup.</h3>
-      </div>
-    </div>
-    <!-- Case 3 -->
-    <div class="case-item">
-      <div class="case-visual">
-        <div class="case-bg case-3">
-          <div class="case-3-inner">
-            <div class="case-3-words">
-              <div class="case-3-row">
-                <div class="case-3-word">PERFORMANCE</div>
-                <div class="case-3-word lit">DRIVEN</div>
-              </div>
-              <div class="case-3-row">
-                <div class="case-3-word pk">CREATIVE</div>
-                <div class="case-3-word">AT SCALE</div>
-              </div>
-              <div class="case-3-row">
-                <div class="case-3-word">CAMPAIGNS</div>
-                <div class="case-3-word cy">THAT WIN</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span class="case-label">AI Ad Design</span>
-      <div class="case-overlay">
-        <p class="case-client">Luxe Commerce</p>
-        <h3 class="case-title">120 AI-generated ad variants delivering 3.4× ROAS improvement in 30 days.</h3>
-      </div>
-    </div>
-    <!-- Case 4 -->
-    <div class="case-item">
-      <div class="case-visual">
-        <div class="case-bg case-4">
-          <div class="case-4-left">
-            <div class="case-4-left-text">Conversion Rate</div>
-            <div class="case-4-left-num">+68%</div>
-          </div>
-          <div class="case-4-inner">
-            <div class="case-4-monitor">
-              <div class="case-4-bar">
-                <div class="c4-dot"></div><div class="c4-dot"></div><div class="c4-dot"></div>
-              </div>
-              <div class="case-4-screen">
-                <div class="c4-sidebar">
-                  <div class="c4-nav active"></div>
-                  <div class="c4-nav"></div>
-                  <div class="c4-nav"></div>
-                  <div class="c4-nav"></div>
-                  <div class="c4-nav" style="width:50%"></div>
-                </div>
-                <div class="c4-main">
-                  <div class="c4-hero-block"></div>
-                  <div class="c4-cards">
-                    <div class="c4-card"></div><div class="c4-card"></div>
-                    <div class="c4-card"></div><div class="c4-card"></div>
+                <div class="case-2-phone second">
+                  <div class="case-2-screen">
+                    <div class="ph-bar cy"></div><div class="ph-bar"></div>
+                    <div class="ph-chip" style="background:rgba(0,212,232,0.1);border-color:rgba(0,212,232,0.2)"></div>
+                    <div class="ph-grid"><div class="ph-block"></div><div class="ph-block"></div></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <span class="case-label">UI Design</span>
+          <div class="case-overlay">
+            <p class="case-client">Orbit Analytics</p>
+            <h3 class="case-title">Mobile-first SaaS dashboard for a Series A analytics startup.</h3>
+          </div>
         </div>
-      </div>
-      <span class="case-label">Website UI</span>
-      <div class="case-overlay">
-        <p class="case-client">Veil Software</p>
-        <h3 class="case-title">Full SaaS product redesign — 68% reduction in time-to-value for new users.</h3>
-      </div>
+
+        <!-- Slide 3 — AI Ads -->
+        <div class="case-item small">
+          <div class="case-visual">
+            <div class="case-bg case-3">
+              <div class="case-3-inner">
+                <div class="case-3-words">
+                  <div class="case-3-row"><div class="case-3-word">PERFORMANCE</div><div class="case-3-word lit">DRIVEN</div></div>
+                  <div class="case-3-row"><div class="case-3-word pk">CREATIVE</div><div class="case-3-word">AT SCALE</div></div>
+                  <div class="case-3-row"><div class="case-3-word">CAMPAIGNS</div><div class="case-3-word cy">THAT WIN</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="case-label">AI Ad Design</span>
+          <div class="case-overlay">
+            <p class="case-client">Luxe Commerce</p>
+            <h3 class="case-title">120 AI-generated ad variants delivering 3.4× ROAS improvement in 30 days.</h3>
+          </div>
+        </div>
+
+        <!-- Slide 4 — Website UI -->
+        <div class="case-item">
+          <div class="case-visual">
+            <div class="case-bg case-4">
+              <div class="case-4-left">
+                <div class="case-4-left-text">Conversion Rate</div>
+                <div class="case-4-left-num">+68%</div>
+              </div>
+              <div class="case-4-inner">
+                <div class="case-4-monitor">
+                  <div class="case-4-bar"><div class="c4-dot"></div><div class="c4-dot"></div><div class="c4-dot"></div></div>
+                  <div class="case-4-screen">
+                    <div class="c4-sidebar">
+                      <div class="c4-nav active"></div><div class="c4-nav"></div><div class="c4-nav"></div><div class="c4-nav"></div><div class="c4-nav" style="width:50%"></div>
+                    </div>
+                    <div class="c4-main">
+                      <div class="c4-hero-block"></div>
+                      <div class="c4-cards"><div class="c4-card"></div><div class="c4-card"></div><div class="c4-card"></div><div class="c4-card"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="case-label">Website UI</span>
+          <div class="case-overlay">
+            <p class="case-client">Veil Software</p>
+            <h3 class="case-title">Full SaaS product redesign — 68% reduction in time-to-value for new users.</h3>
+          </div>
+        </div>
+
+        <!-- Slide 5 — Brand Campaign -->
+        <div class="case-item">
+          <div class="case-visual">
+            <div class="case-bg" style="background:linear-gradient(135deg,#080310 0%,#120520 50%,#0a0218 100%);">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;padding:60px;">
+                <div style="font-family:var(--font-display);font-size:clamp(14px,1.5vw,22px);letter-spacing:0.4em;text-transform:uppercase;color:rgba(0,212,232,0.5);">Campaign Identity</div>
+                <div style="font-family:var(--font-display);font-size:clamp(48px,8vw,130px);line-height:0.9;letter-spacing:-0.02em;text-align:center;background:linear-gradient(135deg,#ff2d9b,#7b2fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">NOVA<br>SPARK</div>
+                <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,232,0.5),transparent);"></div>
+                <div style="font-family:var(--font-alt);font-size:12px;letter-spacing:0.15em;color:rgba(240,236,255,0.3);text-transform:uppercase;">Integrated Brand Campaign 2024</div>
+              </div>
+            </div>
+          </div>
+          <span class="case-label">Brand Campaign</span>
+          <div class="case-overlay">
+            <p class="case-client">Nova Spark</p>
+            <h3 class="case-title">Full integrated brand campaign across 12 markets — 4.1M impressions in week one.</h3>
+          </div>
+        </div>
+
+        <!-- Slide 6 — Motion / Video -->
+        <div class="case-item small">
+          <div class="case-visual">
+            <div class="case-bg" style="background:#060410;">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                <div style="position:relative;width:120px;height:120px;">
+                  <div style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,45,155,0.3);animation:floatShape 3s ease-in-out infinite alternate;"></div>
+                  <div style="position:absolute;inset:12px;border-radius:50%;border:1px solid rgba(0,212,232,0.2);animation:floatShape 4s ease-in-out infinite alternate-reverse;"></div>
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                    <div style="width:0;height:0;border-top:18px solid transparent;border-bottom:18px solid transparent;border-left:28px solid var(--pink);margin-left:6px;filter:drop-shadow(0 0 12px rgba(255,45,155,0.6));"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="position:absolute;bottom:40px;left:0;right:0;text-align:center;font-family:var(--font-display);font-size:clamp(28px,3vw,48px);letter-spacing:0.08em;color:rgba(240,236,255,0.7);">MOTION REEL</div>
+            </div>
+          </div>
+          <span class="case-label">Motion Design</span>
+          <div class="case-overlay">
+            <p class="case-client">Apex Studios</p>
+            <h3 class="case-title">Brand motion reel and social video suite for a global entertainment launch.</h3>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /outer -->
+
+    <div class="carousel-nav">
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-btn" id="carousel-prev">&#8592;</button>
+      <button class="carousel-btn" id="carousel-next">&#8594;</button>
     </div>
   </div>
+
 </section>
 
 <!-- STATEMENT -->
@@ -1134,6 +1198,64 @@
       setTimeout(() => { btn.textContent = 'Send Inquiry →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
     });
   });
+
+  // CAROUSEL
+  (function() {
+    const track   = document.getElementById('carousel-track');
+    const outer   = document.getElementById('carousel-outer');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const dotsWrap= document.getElementById('carousel-dots');
+    const slides  = Array.from(track.children);
+    let current = 0;
+    const GAP = 3;
+
+    // Build dots
+    slides.forEach((_,i) => {
+      const d = document.createElement('div');
+      d.className = 'carousel-dot' + (i===0?' active':'');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function getOffset(idx) {
+      let x = 0;
+      for (let i = 0; i < idx; i++) {
+        x += slides[i].offsetWidth + GAP;
+      }
+      return x;
+    }
+
+    function goTo(idx) {
+      current = Math.max(0, Math.min(idx, slides.length - 1));
+      track.style.transform = `translateX(-${getOffset(current)}px)`;
+      document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+    });
+
+    // Drag / swipe
+    let startX = 0, isDragging = false, startTranslate = 0;
+    outer.addEventListener('mousedown',  e => { isDragging=true; startX=e.clientX; outer.classList.add('dragging'); });
+    outer.addEventListener('mousemove',  e => { if(!isDragging) return; const dx=e.clientX-startX; track.style.transform=`translateX(${-getOffset(current)+dx}px)`; });
+    outer.addEventListener('mouseup',    e => { if(!isDragging) return; isDragging=false; outer.classList.remove('dragging'); const dx=e.clientX-startX; if(Math.abs(dx)>60) goTo(dx<0?current+1:current-1); else goTo(current); });
+    outer.addEventListener('mouseleave', e => { if(!isDragging) return; isDragging=false; outer.classList.remove('dragging'); goTo(current); });
+    outer.addEventListener('touchstart', e => { startX=e.touches[0].clientX; }, {passive:true});
+    outer.addEventListener('touchend',   e => { const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>60) goTo(dx<0?current+1:current-1); });
+
+    // Init
+    goTo(0);
+    window.addEventListener('resize', () => goTo(current), {passive:true});
+  })();
 
   // PARTICLES
   (function() {
