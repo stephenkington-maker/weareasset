@@ -172,9 +172,15 @@
   .hero-headline .line:nth-child(2) span { animation-delay: 0.7s; }
   .hero-headline .line:nth-child(3) span { animation-delay: 0.85s; }
   .hero-headline .grad {
-    background: linear-gradient(90deg, var(--pink) 0%, var(--magenta) 40%, var(--cyan) 100%);
+    background: linear-gradient(90deg, var(--pink) 0%, var(--magenta) 30%, var(--cyan) 55%, var(--pink) 80%, var(--magenta) 100%);
+    background-size: 200% auto;
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     filter: drop-shadow(0 0 30px rgba(255,45,155,0.4));
+    animation: gradientShift 4s linear infinite;
+  }
+  @keyframes gradientShift {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
   }
 
   .hero-sub {
@@ -1114,7 +1120,7 @@
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let W, H, particles = [];
-    const COUNT = 80;
+    const COUNT = 160;
 
     function resize() {
       W = canvas.width  = canvas.offsetWidth;
@@ -1129,7 +1135,7 @@
       return {
         x: rand(0, W),
         y: rand(0, H),
-        r: rand(0.4, 1.6),
+        r: rand(0.3, 2.0),
         vx: rand(-0.12, 0.12),
         vy: rand(-0.18, -0.04),
         alpha: rand(0.1, 0.55),
