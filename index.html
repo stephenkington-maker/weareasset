@@ -1074,7 +1074,7 @@ Message:
 ${message}`
     );
 
-    window.location.href = `mailto:info@weareasset.co.uk?subject=${subject}&body=${body}`;
+    const a = document.createElement('a'); a.href = `mailto:info@weareasset.co.uk?subject=${subject}&body=${body}`; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
 
     // Visual feedback
     const btn = this;
