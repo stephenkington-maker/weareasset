@@ -1044,12 +1044,7 @@
   if(heroImg) heroImg.style.transform='scale(1.08) translateY(0px)';
 
   // FORM
-  // EmailJS — sends to info@weareasset.co.uk
-  // Service ID, Template ID and Public Key are set up on emailjs.com
-  const EMAILJS_SERVICE  = 'service_weareasset';
-  const EMAILJS_TEMPLATE = 'template_weareasset';
-  const EMAILJS_KEY      = 'YOUR_EMAILJS_PUBLIC_KEY'; // replace after EmailJS setup
-
+  // Formspree — delivers to info@weareasset.co.uk
   document.getElementById('form-submit').addEventListener('click', function() {
     const btn = this;
     const name    = document.getElementById('f-name').value.trim();
@@ -1059,45 +1054,56 @@
     const budget  = document.getElementById('f-budget').value;
     const message = document.getElementById('f-message').value.trim();
 
-    if (!name || !email || !message) {
-      document.getElementById('f-name').style.borderColor   = !name    ? 'var(--pink)' : '';
-      document.getElementById('f-email').style.borderColor  = !email   ? 'var(--pink)' : '';
-      document.getElementById('f-message').style.borderColor= !message ? 'var(--pink)' : '';
-      return;
-    }
+    // Basic validation
+    let valid = true;
+    ['f-name','f-email','f-message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { el.style.borderColor = 'var(--pink)'; valid = false; }
+      else el.style.borderColor = '';
+    });
+    if (!valid) return;
 
     btn.textContent = 'Sending…';
     btn.disabled = true;
     btn.style.opacity = '0.7';
 
-    emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
-      from_name:    name,
-      from_email:   email,
-      company:      company || 'Not provided',
-      service:      service || 'Not specified',
-      budget:       budget  || 'Not specified',
-      message:      message,
-      to_email:     'info@weareasset.co.uk'
-    }, EMAILJS_KEY)
-    .then(() => {
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = 'rgba(255,45,155,0.2)';
-      btn.style.color = 'var(--pink)';
-      btn.style.opacity = '1';
-      // Clear fields
-      ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('f-service').selectedIndex = 0;
-      document.getElementById('f-budget').selectedIndex  = 0;
-      setTimeout(() => {
-        btn.textContent = 'Send Inquiry →';
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.disabled = false;
-        closeC();
-      }, 2500);
+    fetch('https://formspree.io/f/xwearasset', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        company:  company || 'Not provided',
+        service:  service || 'Not specified',
+        budget:   budget  || 'Not specified',
+        message,
+        _replyto: email,
+        _subject: 'New Project Inquiry — ASSET Studio'
+      })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok || data.next) {
+        btn.textContent = 'Message Sent ✓';
+        btn.style.background = 'rgba(255,45,155,0.2)';
+        btn.style.color = 'var(--pink)';
+        btn.style.opacity = '1';
+        ['f-name','f-email','f-company','f-message'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('f-service').selectedIndex = 0;
+        document.getElementById('f-budget').selectedIndex  = 0;
+        setTimeout(() => {
+          btn.textContent = 'Send Inquiry →';
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.disabled = false;
+          closeC();
+        }, 2500);
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
     })
     .catch(err => {
-      console.error('EmailJS error:', err);
+      console.error('Form error:', err);
       btn.textContent = 'Failed — Try Again';
       btn.style.background = 'rgba(255,80,80,0.2)';
       btn.style.color = '#ff5555';
@@ -1128,6 +1134,5 @@
     menuBtn.children[1].style.transform=mOpen?'rotate(-45deg) translate(4px,-4px)':'';
   });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 </html>
