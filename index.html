@@ -61,16 +61,15 @@ nav.scrolled{background:rgba(13,12,10,0.9);backdrop-filter:blur(24px);border-bot
 
 /* Background image */
 .hc-bg{
-  position:absolute;inset:-8%;
+  position:absolute;inset:-15%;
   background-size:cover;background-position:center;
-  animation:bgWarp 24s ease-in-out infinite;
+  animation:bgWarp 8s ease-in-out infinite;
   transition:opacity .8s var(--ease);
+  will-change:transform;
 }
 @keyframes bgWarp{
-  0%,100%{transform:scale(1.0) translate(0,0) rotate(0deg);filter:blur(0px) brightness(1)}
-  25%{transform:scale(1.06) translate(1.2%,.8%) rotate(.3deg);filter:blur(3px) brightness(1.05)}
-  50%{transform:scale(1.04) translate(-.8%,1.5%) rotate(-.2deg);filter:blur(5px) brightness(.97)}
-  75%{transform:scale(1.07) translate(-1.2%,-.5%) rotate(.25deg);filter:blur(2px) brightness(1.03)}
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.04)}
 }
 
 /* Dark vignette — heavy bottom-left for text, subtle right */
@@ -896,12 +895,24 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
   if(nextBtn) nextBtn.addEventListener('click',()=>goTo(cur+1));
   document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
 
-  // Scroll driven
+  // Scroll driven — slide change + parallax
   window.addEventListener('scroll',()=>{
-    const top=-lock.getBoundingClientRect().top;
+    const rect=lock.getBoundingClientRect();
+    const top=-rect.top;
     const h=lock.offsetHeight-window.innerHeight;
     const p=Math.max(0,Math.min(.9999,top/h));
+
+    // Slide change
     goTo(Math.floor(p*TOTAL));
+
+    // Parallax — move active bg at 30% of scroll speed
+    const segH=h/TOTAL;
+    const segTop=top - cur*segH;
+    const segP=segTop/segH; // 0..1 within current slide
+    const yShift=(segP-0.5)*18; // -9% to +9%
+    document.querySelectorAll('.hc-slide.active .hc-bg').forEach(bg=>{
+      bg.style.transform=`translateY(${yShift}%) scale(1.0)`;
+    });
   },{passive:true});
 
   // Touch
