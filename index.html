@@ -109,10 +109,10 @@
 
   /* HERO */
   #hero {
-    min-height: 100svh;
+    height: 100svh;
     display: flex; flex-direction: column;
     justify-content: flex-end;
-    padding: calc(var(--nav-h) + 40px) 48px calc(10vh + 48px);
+    padding: 0;
     position: relative; overflow: hidden;
   }
 
@@ -651,19 +651,45 @@
 </nav>
 
 <!-- HERO -->
+<div id="hero-lock">
+<div id="hero-sticky">
 <section id="hero">
-  <div class="hero-img" id="hero-img"></div>
-  <div class="hero-img-overlay"></div>
+  <!-- bg handled by hero-bg-slides -->
   <div class="hero-scanlines"></div>
   <canvas id="particles-canvas"></canvas>
 
   <p class="hero-eyebrow">Premium Design Studio — Est. 2019</p>
 
-  <h1 class="hero-headline">
-    <span class="line"><span>Design that</span></span>
-    <span class="line"><span><span class="grad">moves markets.</span></span></span>
-    <span class="line"><span style="font-weight:300;color:#ffffff">Brands built to win.</span></span>
-  </h1>
+  <div class="hero-messages" id="hero-messages">
+    <div class="hero-msg active" data-img="hero-bg.png">
+      <h1 class="hero-headline">
+        <span class="line"><span>Design that</span></span>
+        <span class="line"><span><span class="grad">moves markets.</span></span></span>
+        <span class="line"><span class="hero-line3">Brands built to win.</span></span>
+      </h1>
+    </div>
+    <div class="hero-msg" data-img="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80">
+      <h1 class="hero-headline">
+        <span class="line"><span>Identity</span></span>
+        <span class="line"><span><span class="grad">that endures.</span></span></span>
+        <span class="line"><span class="hero-line3">Built from the ground up.</span></span>
+      </h1>
+    </div>
+    <div class="hero-msg" data-img="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1920&q=80">
+      <h1 class="hero-headline">
+        <span class="line"><span>Campaigns</span></span>
+        <span class="line"><span><span class="grad">that convert.</span></span></span>
+        <span class="line"><span class="hero-line3">AI-powered. Human-led.</span></span>
+      </h1>
+    </div>
+    <div class="hero-msg" data-img="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80">
+      <h1 class="hero-headline">
+        <span class="line"><span>Interfaces</span></span>
+        <span class="line"><span><span class="grad">that perform.</span></span></span>
+        <span class="line"><span class="hero-line3">From brief to brilliance.</span></span>
+      </h1>
+    </div>
+  </div>
 
   <p class="hero-sub">We craft brand identities, AI-powered campaigns,<br>and digital experiences for ambitious businesses built to last.</p>
 
@@ -681,7 +707,25 @@
     <div class="scroll-line"></div>
     Scroll to explore
   </div>
+  <!-- BG SLIDES -->
+  <div id="hero-bg-slides">
+    <div class="hero-bg-slide active" style="background-image:url('hero-bg.png')"></div>
+    <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80')"></div>
+    <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1547658719-da2b51169166?w=1920&q=80')"></div>
+    <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80')"></div>
+  </div>
+  <!-- PROGRESS -->
+  <div class="hero-progress" id="hero-dots">
+    <div class="hero-prog-dot active"></div>
+    <div class="hero-prog-dot"></div>
+    <div class="hero-prog-dot"></div>
+    <div class="hero-prog-dot"></div>
+  </div>
+  <div class="hero-prog-bar" id="hero-prog-bar"></div>
+  <div class="hero-scroll-lock-hint"><div class="lock-line"></div>Scroll</div>
 </section>
+</div>
+</div>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
@@ -1128,14 +1172,55 @@
     },{threshold:0.1}).observe(el);
   });
 
-  // HERO PARALLAX
-  const heroHL=document.querySelector('.hero-headline');
-  const heroSub=document.querySelector('.hero-sub');
-  window.addEventListener('scroll',()=>{
-    const sy=window.scrollY;
-    if(heroHL) heroHL.style.transform=`translateY(${sy*0.12}px)`;
-    if(heroSub) heroSub.style.transform=`translateY(${sy*0.08}px)`;
-  },{passive:true});
+  // ── HERO SCROLL LOCK
+  (function() {
+    const lock       = document.getElementById('hero-lock');
+    const msgs       = document.querySelectorAll('.hero-msg');
+    const bgSlides   = document.querySelectorAll('.hero-bg-slide');
+    const dots       = document.querySelectorAll('.hero-prog-dot');
+    const progBar    = document.getElementById('hero-prog-bar');
+    const TOTAL      = msgs.length;
+    let current      = 0;
+    let locked       = false;
+
+    function goTo(idx) {
+      if (idx === current) return;
+      msgs[current].classList.remove('active');
+      bgSlides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = Math.max(0, Math.min(idx, TOTAL - 1));
+      msgs[current].classList.add('active');
+      bgSlides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    // Dot click
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    window.addEventListener('scroll', () => {
+      if (!lock) return;
+      const lockRect = lock.getBoundingClientRect();
+      const lockTop  = -lockRect.top;
+      const lockH    = lock.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, lockTop / lockH));
+
+      // Update progress bar
+      if (progBar) progBar.style.width = (progress * 100) + '%';
+
+      // Determine which message to show
+      const segSize = 1 / TOTAL;
+      const newIdx  = Math.min(TOTAL - 1, Math.floor(progress / segSize));
+      if (newIdx !== current) goTo(newIdx);
+    }, { passive: true });
+
+    // Subtle parallax on active headline
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      document.querySelectorAll('.hero-msg.active .hero-headline').forEach(el => {
+        el.style.transform = `translateY(${Math.min(sy * 0.04, 30)}px)`;
+      });
+    }, { passive: true });
+  })();
 
   // FORM
   // Serverless API — sends email to info@weareasset.co.uk via Gmail
