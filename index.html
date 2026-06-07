@@ -106,10 +106,10 @@ nav.scrolled{background:rgba(13,12,10,0.9);backdrop-filter:blur(24px);border-bot
   border:1px solid rgba(255,255,255,.12);border-radius:8px;
   overflow:hidden;cursor:none;
   opacity:0;transform:translateY(14px);
-  transition:opacity .6s var(--ease) .7s,transform .6s var(--ease) .7s,border-color .2s;
+  transition:opacity .5s var(--ease),transform .5s var(--ease),border-color .2s;
+  z-index:10;
 }
-.hc-slide.active .hc-preview{opacity:1;transform:translateY(0)}
-.hc-slide:last-child .hc-preview{opacity:0!important}
+.hc-preview.visible{opacity:1;transform:translateY(0)}
 .hc-preview:hover{border-color:rgba(255,255,255,.25);transform:translateY(-3px)!important}
 .hc-preview-img{width:100%;height:108px;background-size:cover;background-position:center;transition:transform .5s var(--ease)}
 .hc-preview:hover .hc-preview-img{transform:scale(1.04)}
@@ -552,16 +552,6 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
         <span class="hc-pill">Art Direction</span>
       </div>
     </div>
-    <div class="hc-preview" id="hc-prev-card">
-      <div class="hc-preview-img" id="hc-prev-img"></div>
-      <div class="hc-preview-body">
-        <div class="hc-preview-info">
-          <div class="hc-preview-type" id="hc-prev-type">AI Ad Design</div>
-          <div class="hc-preview-next">Next project →</div>
-        </div>
-        <div class="hc-preview-arrow">→</div>
-      </div>
-    </div>
   </div>
 
   <!-- SLIDE 2 -->
@@ -620,6 +610,18 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
     </div>
   </div>
 
+
+  <!-- NEXT PREVIEW — always visible, outside slides -->
+  <div class="hc-preview" id="hc-prev-card">
+    <div class="hc-preview-img" id="hc-prev-img"></div>
+    <div class="hc-preview-body">
+      <div class="hc-preview-info">
+        <div class="hc-preview-type" id="hc-prev-type">AI Ad Design</div>
+        <div class="hc-preview-next">Next project →</div>
+      </div>
+      <div class="hc-preview-arrow">→</div>
+    </div>
+  </div>
 
   <!-- NAV -->
   <div class="hc-nav">
@@ -888,7 +890,7 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     const next=(cur+1)%TOTAL;
     if(prevImg) prevImg.style.backgroundImage=`url('${slideData[next].img}')`;
     if(prevType) prevType.textContent=slideData[next].label;
-    // always show preview (loops back to first)
+    if(prevCard) prevCard.classList.add('visible');
   }
 
   if(prevBtn) prevBtn.addEventListener('click',()=>goTo(cur-1));
@@ -921,8 +923,16 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
   document.getElementById('hero-sticky').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)goTo(dx<0?cur+1:cur-1);});
 
   // Init preview
-  if(prevImg){prevImg.style.backgroundImage=`url('${slideData[1].img}')`;if(prevType)prevType.textContent=slideData[1].label;}
+  function updatePreview(){
+    const next=(cur+1)%TOTAL;
+    if(prevImg) prevImg.style.backgroundImage=`url('${slideData[next].img}')`;
+    if(prevType) prevType.textContent=slideData[next].label;
+    if(prevCard){
+      prevCard.classList.add('visible');
+    }
+  }
   goTo(0);
+  setTimeout(updatePreview, 1200);
 })();
 
 // ── WORK CAROUSEL
