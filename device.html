@@ -5,222 +5,203 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Device — ASSET Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #06040f;
-    --surface: #0d0820;
-    --white: #f0ecff;
-    --white-dim: rgba(240,236,255,0.55);
-    --white-dimmer: rgba(240,236,255,0.3);
-    --pink: #ff2d9b;
-    --pink-dim: rgba(255,45,155,0.12);
-    --cyan: #00d4e8;
-    --magenta: #e020c8;
-    --purple: #7b2fff;
-    --border: rgba(255,255,255,0.07);
-    --border-v: rgba(200,0,255,0.15);
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --nav-h: 72px;
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+:root{
+  --bg:#06040f;
+  --surface:#0d0820;
+  --white:#f0ecff;
+  --dim:rgba(240,236,255,0.55);
+  --dimmer:rgba(240,236,255,0.3);
+  --pink:#ff2d9b;
+  --cyan:#00d4e8;
+  --magenta:#e020c8;
+  --purple:#7b2fff;
+  --border:rgba(255,255,255,0.07);
+  --borderv:rgba(200,0,255,0.15);
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --nav-h:68px;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --fs:'Cormorant Garamond',Georgia,serif;
+}
+body{background:var(--bg);color:var(--white);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/180px}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg); color: var(--white);
-    font-family: var(--font-body); font-weight: 300;
-    line-height: 1.6; overflow-x: hidden; cursor: none;
-  }
+/* ── CURSOR ── */
+#cur{position:fixed;top:0;left:0;z-index:9999;pointer-events:none}
+#cur-d{width:6px;height:6px;border-radius:50%;background:var(--pink);position:absolute;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--pink)}
+#cur-r{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,45,155,.5);position:absolute;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s}
+body.ch #cur-r{width:54px;height:54px;background:rgba(255,45,155,.06);border-color:var(--pink)}
 
-  /* CURSOR */
-  #cursor { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; }
-  #cursor-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); position: absolute; transform: translate(-50%,-50%); box-shadow: 0 0 10px var(--pink); }
-  #cursor-ring { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,45,155,0.5); position: absolute; transform: translate(-50%,-50%); transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s; }
-  body.cursor-hover #cursor-ring { width: 56px; height: 56px; background: rgba(255,45,155,0.06); border-color: var(--pink); }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);display:flex;align-items:center;padding:0 48px;transition:background .4s var(--ease)}
+nav.s{background:rgba(6,4,15,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--borderv)}
+.nl{height:28px;margin-right:auto;display:flex;align-items:center}
+.nl svg{height:28px;width:auto;filter:drop-shadow(0 0 8px rgba(255,45,155,.3))}
+.nm{display:flex;gap:32px;list-style:none;align-items:center}
+.nm a{font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--dim);transition:color .2s}
+.nm a:hover,.nm a.active{color:var(--white)}
+.nc{margin-left:28px;padding:10px 24px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--bg);background:var(--pink);border-radius:2px;box-shadow:0 0 24px rgba(255,45,155,.3);transition:background .2s,transform .2s}
+.nc:hover{background:#ff5db5;transform:translateY(-1px)}
 
-  /* NOISE */
-  body::before { content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 180px; }
+/* ── HERO ── */
+#hero{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:120px 48px 80px}
+.h-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(255,45,155,.1) 0%,rgba(123,47,255,.07) 40%,transparent 70%);pointer-events:none;animation:pglow 7s ease-in-out infinite}
+@keyframes pglow{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.12)}}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.h-eye{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--pink);margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;animation:fup .8s var(--ease) .3s forwards}
+.h-eye::before,.h-eye::after{content:'';width:32px;height:1px;background:var(--pink)}
+.h-title{font-family:var(--fd);font-size:clamp(80px,16vw,240px);line-height:.85;letter-spacing:.02em;position:relative;z-index:1;opacity:0;animation:fup 1s var(--ease) .5s forwards}
+.h-title .g{background:linear-gradient(90deg,#e020c8,#ff2d9b,#00d4e8,#7b2fff,#00d4e8,#ff2d9b,#e020c8,#ff2d9b,#00d4e8,#7b2fff,#00d4e8,#ff2d9b,#e020c8);background-size:400% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;animation:gp 3s linear infinite}
+@keyframes gp{0%{background-position:0% 0%}100%{background-position:100% 0%}}
+.h-sub{font-family:var(--fs);font-size:clamp(18px,2.5vw,34px);font-style:italic;color:var(--dim);margin-top:24px;position:relative;z-index:1;opacity:0;animation:fup .9s var(--ease) .8s forwards}
+.h-scroll{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer);opacity:0;animation:fup 1s var(--ease) 1.5s forwards}
+.h-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--pink),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
+@keyframes fup{to{opacity:1;transform:translateY(0)}}
 
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; padding: 0 48px; transition: background 0.4s var(--ease); }
-  nav.scrolled { background: rgba(6,4,15,0.85); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-v); }
-  .nav-logo { height: 28px; margin-right: auto; display: flex; align-items: center; }
-  .nav-logo svg { height: 28px; width: auto; filter: drop-shadow(0 0 8px rgba(255,45,155,0.3)); }
-  .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
-  .nav-links a { font-family: var(--font-body); font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--white-dim); transition: color 0.2s; }
-  .nav-links a:hover { color: var(--white); }
-  .nav-cta { margin-left: 32px; padding: 10px 26px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--bg); background: var(--pink); border-radius: 2px; box-shadow: 0 0 24px rgba(255,45,155,0.3); transition: background 0.2s, transform 0.2s; }
-  .nav-cta:hover { background: #ff5db5; transform: translateY(-1px); }
+/* ── STICKY PARALLAX SECTIONS ── */
+.sticky-scene{position:relative}
+.sticky-wrap{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center}
 
-  /* HERO */
-  #hero {
-    min-height: 100svh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; position: relative; overflow: hidden;
-    padding: 120px 48px 80px;
-  }
-  .hero-bg-glow {
-    position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%);
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(255,45,155,0.12) 0%, rgba(123,47,255,0.08) 40%, transparent 70%);
-    pointer-events: none; animation: pulseGlow 6s ease-in-out infinite;
-  }
-  @keyframes pulseGlow {
-    0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; }
-    50%      { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
-  }
-  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent); }
-  .hero-tag { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--pink); margin-bottom: 32px; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 0; animation: fadeUp 0.8s var(--ease) 0.3s forwards; }
-  .hero-tag::before, .hero-tag::after { content: ''; width: 32px; height: 1px; background: var(--pink); }
-  .hero-title { font-family: var(--font-display); font-size: clamp(80px, 14vw, 220px); line-height: 0.85; letter-spacing: 0.02em; position: relative; z-index: 1; opacity: 0; animation: fadeUp 1s var(--ease) 0.5s forwards; }
-  .hero-title .grad { background: linear-gradient(90deg,#e020c8,#ff2d9b,#00d4e8,#7b2fff,#00d4e8,#ff2d9b,#e020c8,#ff2d9b,#00d4e8,#7b2fff,#00d4e8,#ff2d9b,#e020c8); background-size: 400% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; animation: gradPan 3s linear infinite; }
-  @keyframes gradPan { 0% { background-position: 0% 0%; } 100% { background-position: 100% 0%; } }
-  .hero-sub { font-family: var(--font-serif); font-size: clamp(18px, 2.5vw, 32px); font-weight: 300; font-style: italic; color: var(--white-dim); margin-top: 28px; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.9s var(--ease) 0.8s forwards; }
-  .hero-device { position: relative; z-index: 2; margin-top: 64px; opacity: 0; animation: fadeUp 1s var(--ease) 1s forwards; }
+/* ── FULL BG IMAGE SECTION ── */
+.img-full{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;will-change:transform}
+.img-overlay{position:absolute;inset:0;z-index:2}
+.scene-text{position:relative;z-index:3;text-align:center;padding:0 48px}
+.scene-text h2{font-family:var(--fd);font-size:clamp(52px,9vw,140px);line-height:.9;letter-spacing:.02em}
+.scene-text p{font-family:var(--fs);font-size:clamp(20px,2.2vw,32px);font-style:italic;color:var(--dim);margin-top:20px}
 
-  /* DEVICE SVG */
-  .device-3d {
-    width: clamp(260px, 30vw, 420px);
-    margin: 0 auto;
-    filter: drop-shadow(0 40px 80px rgba(255,45,155,0.25)) drop-shadow(0 0 60px rgba(123,47,255,0.15));
-    animation: deviceFloat 5s ease-in-out infinite;
-  }
-  @keyframes deviceFloat {
-    0%,100% { transform: translateY(0px) rotate(-1deg); }
-    50%      { transform: translateY(-18px) rotate(1deg); }
-  }
-  .hero-scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dimmer); display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; animation: fadeUp 1s var(--ease) 1.6s forwards; }
-  .scroll-chevron { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--pink), transparent); animation: scrollPulse 2s ease-in-out infinite; }
-  @keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(0.8);}50%{opacity:1;transform:scaleY(1);} }
+/* ── SPLIT SECTION ── */
+.split{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:1440px;gap:80px;padding:0 80px;align-items:center}
+.split.rev{direction:rtl}
+.split.rev>*{direction:ltr}
+.split-img{width:100%;border-radius:4px;overflow:hidden;position:relative}
+.split-img img{width:100%;height:500px;object-fit:cover;display:block;border-radius:4px;transition:transform .8s var(--ease)}
+.split-img:hover img{transform:scale(1.03)}
+.split-copy{padding:40px 0}
+.split-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.split-tag::before{content:'';width:24px;height:1px;background:var(--pink)}
+.split-h{font-family:var(--fd);font-size:clamp(44px,5vw,80px);line-height:.9;margin-bottom:24px}
+.split-p{font-size:15px;font-weight:300;line-height:1.8;color:var(--dim);max-width:460px}
 
-  /* MARQUEE */
-  .marquee-wrap { padding: 24px 0; overflow: hidden; border-top: 1px solid var(--border-v); border-bottom: 1px solid var(--border-v); background: rgba(255,45,155,0.04); }
-  .marquee-track { display: flex; white-space: nowrap; animation: marquee 20s linear infinite; }
-  .marquee-item { display: inline-flex; align-items: center; gap: 32px; padding: 0 32px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dimmer); flex-shrink: 0; }
-  .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 6px var(--pink); }
-  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+/* ── MARQUEE ── */
+.mq{padding:24px 0;overflow:hidden;border-top:1px solid var(--borderv);border-bottom:1px solid var(--borderv);background:rgba(255,45,155,.04)}
+.mq-t{display:flex;white-space:nowrap;animation:mq 22s linear infinite;width:max-content}
+.mq-t.rev{animation-direction:reverse}
+.mq-i{display:inline-flex;align-items:center;gap:28px;padding:0 28px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dimmer);flex-shrink:0}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--pink);box-shadow:0 0 6px var(--pink)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* SECTIONS */
-  .section { padding: 160px 48px; max-width: 1440px; margin: 0 auto; }
-  .section-full { padding: 160px 0; overflow: hidden; }
+/* ── CINEMATIC STATEMENT ── */
+.big-stmt{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 48px;position:relative;overflow:hidden;background:var(--surface)}
+.big-stmt-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(255,45,155,.08) 0%,rgba(0,212,232,.04) 50%,transparent 70%);pointer-events:none}
+.big-stmt h2{font-family:var(--fd);font-size:clamp(56px,10vw,160px);line-height:.88;letter-spacing:.02em;max-width:1200px;position:relative;z-index:1}
+.big-stmt h2 em{font-family:var(--fs);font-style:italic;color:var(--pink);font-size:.85em}
+.big-stmt p{font-family:var(--fb);font-size:16px;color:var(--dim);max-width:480px;margin:36px auto 0;line-height:1.8;position:relative;z-index:1}
 
-  /* BIG STATEMENT */
-  .statement {
-    padding: 180px 48px; text-align: center;
-    background: var(--surface); position: relative; overflow: hidden;
-  }
-  .statement-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(255,45,155,0.07) 0%, transparent 70%); pointer-events: none; }
-  .statement h2 { font-family: var(--font-display); font-size: clamp(52px, 8vw, 130px); line-height: 0.9; letter-spacing: 0.02em; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-  .statement h2 em { font-style: italic; font-family: var(--font-serif); color: var(--pink); font-size: 0.85em; }
-  .statement p { font-family: var(--font-body); font-size: 16px; color: var(--white-dim); max-width: 480px; margin: 36px auto 0; line-height: 1.8; position: relative; z-index: 1; }
+/* ── ICON GRID ── */
+.icon-section{padding:140px 48px;max-width:1440px;margin:0 auto}
+.icon-header{text-align:center;margin-bottom:80px}
+.icon-header h2{font-family:var(--fd);font-size:clamp(44px,6vw,96px);line-height:.9;margin-bottom:16px}
+.icon-header p{font-size:16px;color:var(--dim);max-width:480px;margin:0 auto}
+.icon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+.icon-card{background:var(--surface);padding:36px 24px;text-align:center;transition:background .3s;cursor:none;position:relative;overflow:hidden}
+.icon-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.icon-card:hover{background:#0f0a24}
+.icon-card:hover::before{transform:scaleX(1)}
+.icon-img{width:64px;height:64px;margin:0 auto 16px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.icon-label{font-family:var(--fb);font-size:12px;font-weight:400;letter-spacing:.08em;color:var(--dim)}
 
-  /* FEATURE ROW */
-  .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .feature-panel { padding: 80px 72px; background: var(--surface); position: relative; overflow: hidden; }
-  .feature-panel.dark { background: var(--bg); }
-  .feature-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--pink), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease); }
-  .feature-panel:hover::before { transform: scaleX(1); }
-  .feature-num { font-family: var(--font-display); font-size: 80px; line-height: 1; color: rgba(255,45,155,0.08); position: absolute; top: 32px; right: 48px; }
-  .feature-icon { width: 56px; height: 56px; margin-bottom: 32px; }
-  .feature-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
-  .feature-title { font-family: var(--font-display); font-size: clamp(36px, 3.5vw, 56px); line-height: 1; margin-bottom: 20px; }
-  .feature-desc { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--white-dim); max-width: 420px; }
+/* ── SCROLL GALLERY — horizontal pinned ── */
+.hscroll-scene{position:relative}
+.hscroll-wrap{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center}
+.hscroll-track{display:flex;gap:20px;padding:0 80px;will-change:transform;transition:transform 0s linear}
+.hcard{flex:0 0 420px;height:580px;border-radius:4px;overflow:hidden;position:relative;background:var(--surface)}
+.hcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease)}
+.hcard:hover img{transform:scale(1.04)}
+.hcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,4,15,.85),transparent 50%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:32px}
+.hcard:hover .hcard-overlay{opacity:1}
+.hcard-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.hcard-title{font-family:var(--fd);font-size:32px;line-height:1}
 
-  /* SPECS */
-  #specs { padding: 160px 48px; }
-  .specs-inner { max-width: 1440px; margin: 0 auto; }
-  .specs-header { text-align: center; margin-bottom: 80px; }
-  .specs-title { font-family: var(--font-display); font-size: clamp(48px, 6vw, 96px); line-height: 0.9; margin-bottom: 20px; }
-  .specs-sub { font-size: 16px; color: var(--white-dim); max-width: 460px; margin: 0 auto; }
-  .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .spec-card { padding: 52px 44px; background: var(--surface); text-align: center; position: relative; overflow: hidden; transition: background 0.3s; }
-  .spec-card:hover { background: #0f0a24; }
-  .spec-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--pink), var(--cyan), transparent); opacity: 0; transition: opacity 0.3s; }
-  .spec-card:hover::after { opacity: 1; }
-  .spec-val { font-family: var(--font-display); font-size: clamp(52px, 5vw, 80px); line-height: 1; background: linear-gradient(135deg, var(--pink), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .spec-unit { font-size: 14px; color: var(--white-dimmer); letter-spacing: 0.1em; }
-  .spec-label { font-size: 11px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white-dimmer); margin-top: 10px; }
+/* ── SPECS ── */
+.specs-section{padding:140px 48px;background:var(--surface)}
+.specs-inner{max-width:1440px;margin:0 auto}
+.specs-header{text-align:center;margin-bottom:80px}
+.specs-header h2{font-family:var(--fd);font-size:clamp(44px,6vw,96px);line-height:.9;margin-bottom:16px}
+.specs-header p{font-size:16px;color:var(--dim);max-width:440px;margin:0 auto}
+.specs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.spec-card{padding:52px 44px;background:var(--bg);text-align:center;position:relative;overflow:hidden;transition:background .3s}
+.spec-card:hover{background:#0a0520}
+.spec-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),transparent);opacity:0;transition:opacity .3s}
+.spec-card:hover::after{opacity:1}
+.spec-val{font-family:var(--fd);font-size:clamp(52px,5vw,80px);line-height:1;background:linear-gradient(135deg,var(--pink),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.spec-unit{font-size:14px;color:var(--dimmer);letter-spacing:.1em}
+.spec-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer);margin-top:10px}
 
-  /* SCROLLING IMAGE STRIP */
-  .strip-wrap { overflow: hidden; padding: 3px 0; background: var(--surface); }
-  .strip-track { display: flex; gap: 3px; animation: stripScroll 30s linear infinite; width: max-content; }
-  .strip-track.reverse { animation-direction: reverse; }
-  .strip-item { width: 320px; height: 220px; background: var(--bg); border-radius: 2px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-  @keyframes stripScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+/* ── FULL VIDEO/IMAGE FEATURE ── */
+.full-feature{position:relative;overflow:hidden;height:90vh;display:flex;align-items:center;justify-content:center}
+.ff-img{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;will-change:transform}
+.ff-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,4,15,.8),rgba(6,4,15,.3))}
+.ff-content{position:relative;z-index:2;padding:0 80px;max-width:800px}
+.ff-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.ff-tag::before{content:'';width:24px;height:1px;background:var(--pink)}
+.ff-h{font-family:var(--fd);font-size:clamp(52px,7vw,110px);line-height:.9;margin-bottom:24px}
+.ff-p{font-size:16px;font-weight:300;line-height:1.8;color:var(--dim);max-width:480px}
 
-  /* Strip item visuals */
-  .si-1 { background: linear-gradient(135deg, #0a0520, #1a0830); }
-  .si-2 { background: linear-gradient(135deg, #050a20, #0a1530); }
-  .si-3 { background: linear-gradient(135deg, #0f0520, #200830); }
-  .si-4 { background: linear-gradient(135deg, #050f20, #081525); }
-  .si-5 { background: linear-gradient(135deg, #100820, #1a0f30); }
-  .si-6 { background: linear-gradient(135deg, #080520, #150825); }
-  .si-text { font-family: var(--font-display); font-size: 48px; letter-spacing: 0.06em; opacity: 0.12; }
-  .si-shape { width: 80px; height: 80px; border: 1px solid; border-radius: 50%; opacity: 0.3; }
-  .si-bar { height: 2px; width: 120px; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
-  .si-circle { width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(255,45,155,0.25), transparent); }
-  .si-lines { display: flex; flex-direction: column; gap: 8px; }
-  .si-line { height: 1px; background: rgba(255,45,155,0.2); }
-  .si-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 20px; width: 100%; }
-  .si-block { background: rgba(255,45,155,0.08); border: 1px solid rgba(255,45,155,0.12); border-radius: 4px; height: 60px; }
+/* ── CTA ── */
+#dcta{padding:200px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-bg-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(255,45,155,.09) 0%,rgba(0,212,232,.04) 50%,transparent 70%);pointer-events:none}
+#dcta h2{font-family:var(--fd);font-size:clamp(60px,10vw,160px);line-height:.88;letter-spacing:.02em;max-width:1100px;margin:0 auto 48px;position:relative;z-index:1}
+#dcta h2 .g{background:linear-gradient(90deg,#e020c8,#ff2d9b,#00d4e8,#7b2fff,#00d4e8,#ff2d9b,#e020c8,#ff2d9b,#00d4e8,#e020c8);background-size:400% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;animation:gp 3s linear infinite}
+.btn-pk{display:inline-flex;align-items:center;gap:10px;padding:18px 44px;font-family:var(--fb);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--bg);background:var(--pink);border-radius:2px;box-shadow:0 0 32px rgba(255,45,155,.35);transition:background .2s,transform .25s var(--ease),box-shadow .25s;position:relative;z-index:1;cursor:none}
+.btn-pk:hover{background:#ff5db5;transform:translateY(-2px);box-shadow:0 0 48px rgba(255,45,155,.55)}
+.btn-gh{display:inline-flex;align-items:center;gap:10px;padding:17px 32px;font-family:var(--fb);font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--dim);border:1px solid rgba(255,255,255,.15);border-radius:2px;transition:color .2s,border-color .2s,background .2s;position:relative;z-index:1;cursor:none}
+.btn-gh:hover{color:var(--white);border-color:var(--cyan);background:rgba(0,212,232,.05)}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:20px}
+.cta-fine{font-size:12px;color:var(--dimmer);margin-top:28px;position:relative;z-index:1;letter-spacing:.06em}
 
-  /* WHY */
-  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 80px; }
-  .why-card { padding: 52px 44px; background: var(--surface); transition: background 0.3s; }
-  .why-card:hover { background: #0f0a24; }
-  .why-icon { width: 48px; height: 48px; margin-bottom: 28px; }
-  .why-title { font-family: var(--font-display); font-size: 28px; margin-bottom: 14px; }
-  .why-desc { font-size: 14px; font-weight: 300; line-height: 1.75; color: var(--white-dim); }
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--borderv);padding:40px 48px;display:flex;align-items:center;justify-content:space-between}
+.fl svg{height:22px;width:auto;opacity:.6}
+.flinks{display:flex;gap:24px}
+.flinks a{font-size:11px;color:var(--dimmer);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+.flinks a:hover{color:var(--white)}
+.fcopy{font-size:11px;color:var(--dimmer);letter-spacing:.04em}
 
-  /* CTA */
-  #device-cta { padding: 200px 48px; text-align: center; position: relative; overflow: hidden; background: var(--surface); }
-  .cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(255,45,155,0.09) 0%, rgba(0,212,232,0.04) 50%, transparent 70%); pointer-events: none; }
-  .cta-title { font-family: var(--font-display); font-size: clamp(56px, 9vw, 150px); line-height: 0.9; letter-spacing: 0.02em; max-width: 1100px; margin: 0 auto 48px; position: relative; z-index: 1; }
-  .cta-title .grad { background: linear-gradient(90deg,#e020c8,#ff2d9b,#00d4e8,#7b2fff,#00d4e8,#ff2d9b,#e020c8,#ff2d9b,#00d4e8,#e020c8); background-size: 400% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; animation: gradPan 3s linear infinite; }
-  .cta-sub { font-size: 16px; color: var(--white-dim); margin-bottom: 48px; position: relative; z-index: 1; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 18px 44px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--bg); background: var(--pink); border-radius: 2px; box-shadow: 0 0 32px rgba(255,45,155,0.35); transition: background 0.2s, transform 0.25s var(--ease), box-shadow 0.25s; cursor: none; }
-  .btn-primary:hover { background: #ff5db5; transform: translateY(-2px); box-shadow: 0 0 48px rgba(255,45,155,0.55); }
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rev.vis{opacity:1;transform:none}
+.rd1{transition-delay:.12s}.rd2{transition-delay:.24s}.rd3{transition-delay:.36s}
 
-  /* FOOTER */
-  .device-footer { border-top: 1px solid var(--border-v); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; }
-  .device-footer-logo svg { height: 22px; width: auto; opacity: 0.6; }
-  .device-footer-links { display: flex; gap: 28px; }
-  .device-footer-links a { font-size: 11px; color: var(--white-dimmer); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
-  .device-footer-links a:hover { color: var(--white); }
-  .device-footer-copy { font-size: 11px; color: var(--white-dimmer); letter-spacing: 0.04em; }
-
-  /* REVEAL */
-  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.12s; }
-  .reveal-delay-2 { transition-delay: 0.24s; }
-  .reveal-delay-3 { transition-delay: 0.36s; }
-
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    :root { --nav-h: 60px; }
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    .feature-row, .specs-grid, .why-grid { grid-template-columns: 1fr; }
-    .feature-panel { padding: 52px 32px; }
-    .section, #specs, #device-cta { padding-left: 24px; padding-right: 24px; }
-    .statement { padding: 100px 24px; }
-    .device-footer { flex-direction: column; gap: 24px; text-align: center; padding: 32px 24px; }
-  }
+/* ── MOBILE ── */
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nm{display:none}
+  .split{grid-template-columns:1fr;padding:0 32px;gap:40px}
+  .split.rev{direction:ltr}
+  .icon-grid{grid-template-columns:repeat(3,1fr)}
+  .specs-grid{grid-template-columns:1fr 1fr}
+  .hcard{flex:0 0 85vw}
+  .ff-content{padding:0 32px}
+  #dcta{padding:120px 24px}
+  footer{flex-direction:column;gap:20px;text-align:center;padding:32px 24px}
+  .icon-section{padding:80px 24px}
+  .specs-section{padding:80px 24px}
+}
 </style>
 </head>
 <body>
 
-<div id="cursor"><div id="cursor-ring"></div><div id="cursor-dot"></div></div>
+<!-- CURSOR -->
+<div id="cur"><div id="cur-r"></div><div id="cur-d"></div></div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="nav-logo">
+  <a href="index.html" class="nl">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 545.1 197.7">
       <polygon points="88.7 112.1 98.4 135 98.6 134.9 88.9 112.1 88.7 112.1" fill="#fff"/>
       <polygon points="69.3 65.1 69 65.6 85.2 103.8 85.5 103.8 69.3 65.1" fill="#fff"/>
@@ -232,316 +213,244 @@
       <polygon points="483 135.2 492 135.2 492 131.2 483 135.1 483 135.2" fill="#fff"/>
     </svg>
   </a>
-  <ul class="nav-links">
+  <ul class="nm">
     <li><a href="index.html#services">Services</a></li>
     <li><a href="index.html#work">Work</a></li>
-    <li><a href="device.html" style="color:var(--pink)">The Device</a></li>
+    <li><a href="device.html" class="active" style="color:var(--pink)">The Device</a></li>
     <li><a href="index.html#testimonials">Clients</a></li>
-    <a href="index.html" class="nav-cta" id="open-contact">Start a Project</a>
+    <a href="index.html" class="nc">Start a Project</a>
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — HERO
+═══════════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-bg-glow"></div>
-  <div class="hero-grid"></div>
-  <p class="hero-tag">ASSET Studio — Creative Technology</p>
-  <h1 class="hero-title">THE<br><span class="grad">DEVICE</span></h1>
-  <p class="hero-sub">Design that doesn't just look good. Design that performs.</p>
-
-  <!-- Floating Device -->
-  <div class="hero-device">
-    <svg class="device-3d" viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#1a0f2e"/>
-          <stop offset="50%" stop-color="#0f0820"/>
-          <stop offset="100%" stop-color="#0a0518"/>
-        </linearGradient>
-        <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#1a0830"/>
-          <stop offset="100%" stop-color="#080418"/>
-        </linearGradient>
-        <linearGradient id="pinkGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#e020c8"/>
-          <stop offset="50%" stop-color="#ff2d9b"/>
-          <stop offset="100%" stop-color="#00d4e8"/>
-        </linearGradient>
-        <linearGradient id="edgeGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(255,45,155,0.4)"/>
-          <stop offset="100%" stop-color="rgba(255,45,155,0)"/>
-        </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <!-- Body -->
-      <rect x="60" y="20" width="300" height="480" rx="40" fill="url(#bodyGrad)" stroke="rgba(255,45,155,0.2)" stroke-width="1"/>
-      <!-- Edge highlight -->
-      <rect x="60" y="20" width="300" height="480" rx="40" fill="none" stroke="url(#edgeGrad)" stroke-width="1.5"/>
-      <!-- Screen bezel -->
-      <rect x="76" y="36" width="268" height="448" rx="32" fill="url(#screenGrad)"/>
-      <!-- Screen content -->
-      <rect x="88" y="48" width="244" height="424" rx="26" fill="#060210"/>
-      <!-- Screen glow -->
-      <rect x="88" y="48" width="244" height="424" rx="26" fill="url(#pinkGrad)" opacity="0.05"/>
-      <!-- Top notch -->
-      <rect x="168" y="56" width="84" height="12" rx="6" fill="#0a0618"/>
-      <!-- UI elements on screen -->
-      <rect x="108" y="90" width="160" height="4" rx="2" fill="rgba(255,45,155,0.4)"/>
-      <rect x="108" y="102" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
-      <rect x="108" y="130" width="204" height="80" rx="8" fill="rgba(255,45,155,0.06)" stroke="rgba(255,45,155,0.12)" stroke-width="1"/>
-      <!-- Chart bars -->
-      <rect x="120" y="175" width="16" height="24" rx="2" fill="rgba(255,45,155,0.3)"/>
-      <rect x="142" y="162" width="16" height="37" rx="2" fill="rgba(255,45,155,0.5)"/>
-      <rect x="164" y="168" width="16" height="31" rx="2" fill="rgba(0,212,232,0.4)"/>
-      <rect x="186" y="155" width="16" height="44" rx="2" fill="rgba(255,45,155,0.7)" filter="url(#glow)"/>
-      <rect x="208" y="170" width="16" height="29" rx="2" fill="rgba(0,212,232,0.3)"/>
-      <rect x="230" y="158" width="16" height="41" rx="2" fill="rgba(123,47,255,0.4)"/>
-      <!-- Cards row -->
-      <rect x="108" y="228" width="96" height="60" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-      <rect x="212" y="228" width="100" height="60" rx="6" fill="rgba(255,45,155,0.08)" stroke="rgba(255,45,155,0.12)" stroke-width="1"/>
-      <!-- Stat lines -->
-      <rect x="108" y="308" width="204" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
-      <rect x="108" y="318" width="140" height="3" rx="1.5" fill="rgba(255,45,155,0.3)"/>
-      <rect x="108" y="328" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
-      <rect x="108" y="338" width="90" height="3" rx="1.5" fill="rgba(0,212,232,0.25)"/>
-      <!-- Bottom nav bar -->
-      <rect x="88" y="430" width="244" height="42" rx="0" fill="rgba(0,0,0,0.4)"/>
-      <rect x="88" y="430" width="244" height="1" fill="rgba(255,45,155,0.1)"/>
-      <circle cx="152" cy="451" r="8" fill="rgba(255,45,155,0.2)" stroke="rgba(255,45,155,0.4)" stroke-width="1"/>
-      <circle cx="210" cy="451" r="8" fill="rgba(255,255,255,0.04)"/>
-      <circle cx="268" cy="451" r="8" fill="rgba(255,255,255,0.04)"/>
-      <!-- Home indicator -->
-      <rect x="176" y="476" width="68" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <!-- Side button -->
-      <rect x="358" y="140" width="6" height="50" rx="3" fill="rgba(255,45,155,0.3)"/>
-      <rect x="56" y="160" width="6" height="36" rx="3" fill="rgba(255,255,255,0.1)"/>
-      <rect x="56" y="204" width="6" height="36" rx="3" fill="rgba(255,255,255,0.1)"/>
-    </svg>
-  </div>
-
-  <div class="hero-scroll-hint">
-    <div class="scroll-chevron"></div>
-    Scroll to explore
-  </div>
+  <div class="h-glow"></div>
+  <div class="h-grid"></div>
+  <p class="h-eye">ASSET Studio — Creative Technology</p>
+  <h1 class="h-title">THE<br><span class="g">DEVICE.</span></h1>
+  <p class="h-sub">Design that doesn't just look good. Design that performs.</p>
+  <div class="h-scroll"><div class="h-line"></div>Scroll</div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">Brand Identity <span class="marquee-dot"></span></div>
-    <div class="marquee-item">UI / UX Design <span class="marquee-dot"></span></div>
-    <div class="marquee-item">AI Ad Creative <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Motion Systems <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Visual Strategy <span class="marquee-dot"></span></div>
-    <div class="marquee-item">SaaS Interfaces <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Campaign Design <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Design Systems <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Brand Identity <span class="marquee-dot"></span></div>
-    <div class="marquee-item">UI / UX Design <span class="marquee-dot"></span></div>
-    <div class="marquee-item">AI Ad Creative <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Motion Systems <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Visual Strategy <span class="marquee-dot"></span></div>
-    <div class="marquee-item">SaaS Interfaces <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Campaign Design <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Design Systems <span class="marquee-dot"></span></div>
-  </div>
-</div>
-
-<!-- STATEMENT 1 -->
-<div class="statement">
-  <div class="statement-glow"></div>
-  <h2 class="reveal">DESIGN IS THE <em>product.</em><br>NOT THE PACKAGING.</h2>
-  <p class="reveal reveal-delay-1">Every pixel, every interaction, every brand touchpoint is a decision. We make those decisions with intention — and the results speak for themselves.</p>
-</div>
-
-<!-- SCROLLING STRIP 1 -->
-<div class="section-full">
-  <div class="strip-wrap">
-    <div class="strip-track">
-      <div class="strip-item si-1"><div class="si-text" style="color:rgba(255,45,155,0.3)">BRAND</div></div>
-      <div class="strip-item si-2"><div class="si-circle"></div></div>
-      <div class="strip-item si-3"><div class="si-lines"><div class="si-line" style="width:160px"></div><div class="si-line" style="width:100px"></div><div class="si-line" style="width:140px"></div><div class="si-line" style="width:80px"></div></div></div>
-      <div class="strip-item si-4"><div class="si-text" style="color:rgba(0,212,232,0.3)">FORM</div></div>
-      <div class="strip-item si-5"><div class="si-grid"><div class="si-block"></div><div class="si-block"></div><div class="si-block" style="background:rgba(0,212,232,0.08);border-color:rgba(0,212,232,0.12)"></div><div class="si-block"></div></div></div>
-      <div class="strip-item si-6"><div class="si-bar"></div></div>
-      <div class="strip-item si-1"><div class="si-shape" style="border-color:rgba(255,45,155,0.4)"></div></div>
-      <div class="strip-item si-2"><div class="si-text" style="color:rgba(123,47,255,0.3)">TYPE</div></div>
-      <div class="strip-item si-3"><div class="si-circle" style="background:radial-gradient(circle,rgba(0,212,232,0.2),transparent)"></div></div>
-      <div class="strip-item si-4"><div class="si-grid"><div class="si-block" style="background:rgba(0,212,232,0.08)"></div><div class="si-block"></div><div class="si-block"></div><div class="si-block" style="background:rgba(123,47,255,0.08)"></div></div></div>
-      <!-- duplicate for seamless loop -->
-      <div class="strip-item si-1"><div class="si-text" style="color:rgba(255,45,155,0.3)">BRAND</div></div>
-      <div class="strip-item si-2"><div class="si-circle"></div></div>
-      <div class="strip-item si-3"><div class="si-lines"><div class="si-line" style="width:160px"></div><div class="si-line" style="width:100px"></div><div class="si-line" style="width:140px"></div><div class="si-line" style="width:80px"></div></div></div>
-      <div class="strip-item si-4"><div class="si-text" style="color:rgba(0,212,232,0.3)">FORM</div></div>
-      <div class="strip-item si-5"><div class="si-grid"><div class="si-block"></div><div class="si-block"></div><div class="si-block" style="background:rgba(0,212,232,0.08)"></div><div class="si-block"></div></div></div>
-      <div class="strip-item si-6"><div class="si-bar"></div></div>
-      <div class="strip-item si-1"><div class="si-shape" style="border-color:rgba(255,45,155,0.4)"></div></div>
-      <div class="strip-item si-2"><div class="si-text" style="color:rgba(123,47,255,0.3)">TYPE</div></div>
-      <div class="strip-item si-3"><div class="si-circle" style="background:radial-gradient(circle,rgba(0,212,232,0.2),transparent)"></div></div>
-      <div class="strip-item si-4"><div class="si-grid"><div class="si-block" style="background:rgba(0,212,232,0.08)"></div><div class="si-block"></div><div class="si-block"></div><div class="si-block" style="background:rgba(123,47,255,0.08)"></div></div></div>
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — FULL SCREEN STICKY PARALLAX IMAGE
+═══════════════════════════════════════════ -->
+<div class="sticky-scene" style="height:250vh">
+  <div class="sticky-wrap">
+    <img class="img-full" id="par1" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=80" alt="Design workspace">
+    <div class="img-overlay" style="background:linear-gradient(to top,rgba(6,4,15,.85) 0%,rgba(6,4,15,.1) 50%,rgba(6,4,15,.4) 100%)"></div>
+    <div class="scene-text">
+      <h2 class="rev" style="opacity:0">REINVENTING<br>THE WAY</h2>
+      <p class="rev rd1" style="opacity:0">Design moves business forward.</p>
     </div>
   </div>
 </div>
 
-<!-- FEATURES -->
-<section class="section">
-  <div class="feature-row reveal">
-    <div class="feature-panel dark">
-      <div class="feature-num">01</div>
-      <div class="feature-tag">Graphic Design</div>
-      <h3 class="feature-title">IDENTITY<br>SYSTEMS</h3>
-      <p class="feature-desc">Brand identities built from the ground up — logo, mark, colour, type, and everything in between. Visual language that scales from a business card to a billboard without losing its soul.</p>
-    </div>
-    <div class="feature-panel">
-      <div class="feature-num">02</div>
-      <div class="feature-tag">AI Ad Design</div>
-      <h3 class="feature-title">CAMPAIGNS<br>AT SCALE</h3>
-      <p class="feature-desc">AI-powered creative production guided by expert art direction. Launch 100 ad variants in the time it used to take to produce 5 — without sacrificing an ounce of quality or brand integrity.</p>
-    </div>
+<!-- ═══════════════════════════════════════════
+     MARQUEE 1
+═══════════════════════════════════════════ -->
+<div class="mq">
+  <div class="mq-t">
+    <div class="mq-i">Brand Identity<span class="mq-dot"></span></div><div class="mq-i">UI Design<span class="mq-dot"></span></div><div class="mq-i">AI Ads<span class="mq-dot"></span></div><div class="mq-i">Motion<span class="mq-dot"></span></div><div class="mq-i">Strategy<span class="mq-dot"></span></div><div class="mq-i">Systems<span class="mq-dot"></span></div><div class="mq-i">Campaigns<span class="mq-dot"></span></div><div class="mq-i">Typography<span class="mq-dot"></span></div>
+    <div class="mq-i">Brand Identity<span class="mq-dot"></span></div><div class="mq-i">UI Design<span class="mq-dot"></span></div><div class="mq-i">AI Ads<span class="mq-dot"></span></div><div class="mq-i">Motion<span class="mq-dot"></span></div><div class="mq-i">Strategy<span class="mq-dot"></span></div><div class="mq-i">Systems<span class="mq-dot"></span></div><div class="mq-i">Campaigns<span class="mq-dot"></span></div><div class="mq-i">Typography<span class="mq-dot"></span></div>
   </div>
-  <div class="feature-row reveal reveal-delay-1" style="margin-top:2px">
-    <div class="feature-panel">
-      <div class="feature-num">03</div>
-      <div class="feature-tag">Website UI Design</div>
-      <h3 class="feature-title">INTERFACES<br>THAT CONVERT</h3>
-      <p class="feature-desc">SaaS dashboards, landing pages, and digital products designed to move users from first impression to conversion — with interactions that feel effortless and memorable.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — BIG STATEMENT
+═══════════════════════════════════════════ -->
+<div class="big-stmt">
+  <div class="big-stmt-glow"></div>
+  <div>
+    <h2 class="rev">DESIGN IS THE <em>product.</em><br>NOT THE PACKAGING.</h2>
+    <p class="rev rd1">Every pixel, every interaction, every brand touchpoint is a decision made with intention. The results speak for themselves.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — SPLIT: GRAPHIC DESIGN
+═══════════════════════════════════════════ -->
+<section style="padding:160px 0;max-width:1440px;margin:0 auto">
+  <div class="split">
+    <div class="split-img rev">
+      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80" alt="Graphic Design">
     </div>
-    <div class="feature-panel dark">
-      <div class="feature-num">04</div>
-      <div class="feature-tag">Strategy</div>
-      <h3 class="feature-title">VISION<br>BEFORE PIXELS</h3>
-      <p class="feature-desc">Every project starts with a strategy session — competitive landscape, audience psychology, and positioning. We build the right thing beautifully, not just beautiful things.</p>
+    <div class="split-copy rev">
+      <p class="split-tag">01 — Graphic Design</p>
+      <h2 class="split-h rev">IDENTITY<br>SYSTEMS<br>THAT LAST.</h2>
+      <p class="split-p rev rd1">Brand identities built from the ground up — logo, mark, colour, type, and everything in between. Visual language that scales from a business card to a billboard without losing its soul.</p>
     </div>
   </div>
 </section>
 
-<!-- SPECS -->
-<section id="specs">
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — SECOND STICKY PARALLAX
+═══════════════════════════════════════════ -->
+<div class="sticky-scene" style="height:200vh">
+  <div class="sticky-wrap">
+    <img class="img-full" id="par2" src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1920&q=80" alt="UI Design">
+    <div class="img-overlay" style="background:linear-gradient(135deg,rgba(6,4,15,.8),rgba(6,4,15,.2) 60%,rgba(6,4,15,.6))"></div>
+    <div class="scene-text" style="text-align:left;padding:0 80px;max-width:900px;margin-right:auto">
+      <p class="split-tag rev" style="opacity:0">02 — AI Ad Design</p>
+      <h2 class="rev" style="opacity:0;font-size:clamp(52px,8vw,120px)">CAMPAIGNS<br>AT THE<br>SPEED OF NOW.</h2>
+      <p class="rev rd1" style="opacity:0;font-family:var(--fs);font-size:clamp(16px,2vw,26px);font-style:italic;color:var(--dim);margin-top:20px;max-width:520px">AI-powered creative production guided by expert art direction. 100 variants in the time it used to take to produce 5.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MARQUEE 2 REVERSE
+═══════════════════════════════════════════ -->
+<div class="mq">
+  <div class="mq-t rev">
+    <div class="mq-i">Performance Creative<span class="mq-dot"></span></div><div class="mq-i">Meta Ads<span class="mq-dot"></span></div><div class="mq-i">A/B Variants<span class="mq-dot"></span></div><div class="mq-i">Video Ads<span class="mq-dot"></span></div><div class="mq-i">Social Content<span class="mq-dot"></span></div><div class="mq-i">Display<span class="mq-dot"></span></div><div class="mq-i">ROAS Focused<span class="mq-dot"></span></div><div class="mq-i">Conversion<span class="mq-dot"></span></div>
+    <div class="mq-i">Performance Creative<span class="mq-dot"></span></div><div class="mq-i">Meta Ads<span class="mq-dot"></span></div><div class="mq-i">A/B Variants<span class="mq-dot"></span></div><div class="mq-i">Video Ads<span class="mq-dot"></span></div><div class="mq-i">Social Content<span class="mq-dot"></span></div><div class="mq-i">Display<span class="mq-dot"></span></div><div class="mq-i">ROAS Focused<span class="mq-dot"></span></div><div class="mq-i">Conversion<span class="mq-dot"></span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — SPLIT: UI DESIGN (reversed)
+═══════════════════════════════════════════ -->
+<section style="padding:160px 0;max-width:1440px;margin:0 auto">
+  <div class="split rev">
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80" alt="UI Design">
+    </div>
+    <div class="split-copy">
+      <p class="split-tag">03 — Website UI Design</p>
+      <h2 class="split-h rev">INTERFACES<br>THAT<br>CONVERT.</h2>
+      <p class="split-p rev rd1">SaaS dashboards, landing pages, and digital products built to move users from first impression to conversion — with interactions that feel effortless and impossible to forget.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — ICON GRID (like tinyPod apps)
+═══════════════════════════════════════════ -->
+<section class="icon-section">
+  <div class="icon-header rev">
+    <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:12px">Everything you need.</p>
+    <h2>ALL IN ONE<br>STUDIO.</h2>
+    <p style="margin-top:16px">Every discipline, every deliverable — under one creative roof.</p>
+  </div>
+  <div class="icon-grid rev">
+    <div class="icon-card"><div class="icon-img" style="background:linear-gradient(135deg,#ff2d9b,#e020c8)">🎨</div><p class="icon-label">Branding</p></div>
+    <div class="icon-card"><div class="icon-img" style="background:linear-gradient(135deg,#00d4e8,#7b2fff)">✦</div><p class="icon-label">Logos</p></div>
+    <div class="icon-card"><div class="icon-img" style="background:linear-gradient(135deg,#7b2fff,#e020c8)">⬛</div><p class="icon-label">UI Design</p></div>
+    <div class="icon-card"><div class="icon-img" style="background:linear-gradient(135deg,#ff2d9b,#00d4e8)">◈</div><p class="icon-label">Ad Creative</p></div>
+    <div class="icon-card"><div class="icon-img" style="background:linear-gradient(135deg,#e020c8,#7b2fff)">▶</div><p class="icon-label">Motion</p></div>
+    <div class="icon-card"><div class="icon-img" style="background:linear-gradient(135deg,#00d4e8,#ff2d9b)">◎</div><p class="icon-label">Strategy</p></div>
+    <div class="icon-card rd1"><div class="icon-img" style="background:linear-gradient(135deg,#7b2fff,#ff2d9b)">⟡</div><p class="icon-label">Typography</p></div>
+    <div class="icon-card rd1"><div class="icon-img" style="background:linear-gradient(135deg,#ff2d9b,#e020c8)">◻</div><p class="icon-label">Print</p></div>
+    <div class="icon-card rd1"><div class="icon-img" style="background:linear-gradient(135deg,#00d4e8,#7b2fff)">⬡</div><p class="icon-label">Packaging</p></div>
+    <div class="icon-card rd1"><div class="icon-img" style="background:linear-gradient(135deg,#e020c8,#00d4e8)">◈</div><p class="icon-label">Social</p></div>
+    <div class="icon-card rd2"><div class="icon-img" style="background:linear-gradient(135deg,#ff2d9b,#7b2fff)">✦</div><p class="icon-label">Campaigns</p></div>
+    <div class="icon-card rd2"><div class="icon-img" style="background:linear-gradient(135deg,#7b2fff,#00d4e8)">◎</div><p class="icon-label">Systems</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — HORIZONTAL SCROLL GALLERY
+═══════════════════════════════════════════ -->
+<div class="hscroll-scene" id="hscene" style="height:300vh">
+  <div class="hscroll-wrap">
+    <div class="hscroll-track" id="htrack">
+      <div style="flex:0 0 80px"></div>
+      <div class="hcard">
+        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80" alt="Brand Identity">
+        <div class="hcard-overlay"><p class="hcard-tag">Graphic Design</p><h3 class="hcard-title">MERIDIAN<br>CAPITAL</h3></div>
+      </div>
+      <div class="hcard">
+        <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80" alt="UI Design">
+        <div class="hcard-overlay"><p class="hcard-tag">UI Design</p><h3 class="hcard-title">ORBIT<br>ANALYTICS</h3></div>
+      </div>
+      <div class="hcard">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80" alt="Campaign">
+        <div class="hcard-overlay"><p class="hcard-tag">AI Ad Design</p><h3 class="hcard-title">LUXE<br>COMMERCE</h3></div>
+      </div>
+      <div class="hcard">
+        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=800&q=80" alt="SaaS">
+        <div class="hcard-overlay"><p class="hcard-tag">Website UI</p><h3 class="hcard-title">VEIL<br>SOFTWARE</h3></div>
+      </div>
+      <div class="hcard">
+        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80" alt="Brand">
+        <div class="hcard-overlay"><p class="hcard-tag">Brand Campaign</p><h3 class="hcard-title">NOVA<br>SPARK</h3></div>
+      </div>
+      <div class="hcard">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Strategy">
+        <div class="hcard-overlay"><p class="hcard-tag">Strategy + Design</p><h3 class="hcard-title">APEX<br>STUDIOS</h3></div>
+      </div>
+      <div style="flex:0 0 80px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 9 — FULL FEATURE PARALLAX
+═══════════════════════════════════════════ -->
+<div class="full-feature">
+  <img class="ff-img" id="par3" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80" alt="Results">
+  <div class="ff-overlay"></div>
+  <div class="ff-content">
+    <p class="ff-tag rev" style="opacity:0">By The Numbers</p>
+    <h2 class="ff-h rev" style="opacity:0">RESULTS<br>THAT SPEAK.</h2>
+    <p class="ff-p rev rd1" style="opacity:0">140+ projects. 98% retention. 3.4× average ROAS improvement. The numbers aren't a boast — they're a guarantee of what we bring to every brief.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 10 — SPECS GRID
+═══════════════════════════════════════════ -->
+<section class="specs-section">
   <div class="specs-inner">
-    <div class="specs-header reveal">
-      <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);margin-bottom:16px;">By The Numbers</p>
-      <h2 class="specs-title">THE RESULTS<br>SPEAK.</h2>
-      <p class="specs-sub">Real numbers from real projects. This is what exceptional design actually delivers.</p>
+    <div class="specs-header rev">
+      <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:12px">Real Numbers</p>
+      <h2>THE PROOF.</h2>
+      <p>Design that moves the needle — on the revenue dashboard, not just the mood board.</p>
     </div>
     <div class="specs-grid">
-      <div class="spec-card reveal"><div class="spec-val">3.4<span class="spec-unit">×</span></div><div class="spec-label">Average ROAS improvement on AI ad campaigns</div></div>
-      <div class="spec-card reveal reveal-delay-1"><div class="spec-val">68<span class="spec-unit">%</span></div><div class="spec-label">Reduction in time-to-value after UI redesign</div></div>
-      <div class="spec-card reveal reveal-delay-2"><div class="spec-val">140<span class="spec-unit">+</span></div><div class="spec-label">Premium projects delivered across 6 years</div></div>
-      <div class="spec-card reveal"><div class="spec-val">4.1<span class="spec-unit">M</span></div><div class="spec-label">Campaign impressions in first week for NovaSpark</div></div>
-      <div class="spec-card reveal reveal-delay-1"><div class="spec-val">98<span class="spec-unit">%</span></div><div class="spec-label">Client retention rate over studio lifetime</div></div>
-      <div class="spec-card reveal reveal-delay-2"><div class="spec-val">30<span class="spec-unit">d</span></div><div class="spec-label">Average delivery time from brief to brand launch</div></div>
+      <div class="spec-card rev"><div class="spec-val">3.4<span class="spec-unit">×</span></div><div class="spec-label">Average ROAS improvement</div></div>
+      <div class="spec-card rev rd1"><div class="spec-val">68<span class="spec-unit">%</span></div><div class="spec-label">Reduction in time-to-value after redesign</div></div>
+      <div class="spec-card rev rd2"><div class="spec-val">140<span class="spec-unit">+</span></div><div class="spec-label">Premium projects delivered</div></div>
+      <div class="spec-card rev"><div class="spec-val">98<span class="spec-unit">%</span></div><div class="spec-label">Client retention rate</div></div>
+      <div class="spec-card rev rd1"><div class="spec-val">4.1<span class="spec-unit">M</span></div><div class="spec-label">Campaign impressions — week one</div></div>
+      <div class="spec-card rev rd2"><div class="spec-val">30<span class="spec-unit">d</span></div><div class="spec-label">Average brand delivery time</div></div>
     </div>
   </div>
 </section>
 
-<!-- SCROLLING STRIP 2 REVERSE -->
-<div class="section-full">
-  <div class="strip-wrap">
-    <div class="strip-track reverse">
-      <div class="strip-item si-5"><div class="si-text" style="color:rgba(0,212,232,0.25)">MOTION</div></div>
-      <div class="strip-item si-1"><div class="si-shape" style="border-color:rgba(0,212,232,0.3);width:100px;height:100px"></div></div>
-      <div class="strip-item si-3"><div class="si-bar" style="background:linear-gradient(90deg,var(--cyan),var(--purple))"></div></div>
-      <div class="strip-item si-6"><div class="si-text" style="color:rgba(255,45,155,0.25)">PIXEL</div></div>
-      <div class="strip-item si-2"><div class="si-grid"><div class="si-block" style="background:rgba(123,47,255,0.1)"></div><div class="si-block"></div><div class="si-block"></div><div class="si-block" style="background:rgba(0,212,232,0.1)"></div></div></div>
-      <div class="strip-item si-4"><div class="si-circle" style="width:80px;height:80px;background:radial-gradient(circle,rgba(123,47,255,0.2),transparent)"></div></div>
-      <div class="strip-item si-1"><div class="si-text" style="color:rgba(123,47,255,0.25)">COLOR</div></div>
-      <div class="strip-item si-5"><div class="si-lines"><div class="si-line" style="width:180px;background:rgba(0,212,232,0.2)"></div><div class="si-line" style="width:120px"></div><div class="si-line" style="width:160px;background:rgba(123,47,255,0.2)"></div></div></div>
-      <div class="strip-item si-3"><div class="si-bar" style="width:80px"></div></div>
-      <div class="strip-item si-6"><div class="si-shape" style="border-color:rgba(123,47,255,0.3);width:90px;height:90px"></div></div>
-      <!-- duplicate -->
-      <div class="strip-item si-5"><div class="si-text" style="color:rgba(0,212,232,0.25)">MOTION</div></div>
-      <div class="strip-item si-1"><div class="si-shape" style="border-color:rgba(0,212,232,0.3);width:100px;height:100px"></div></div>
-      <div class="strip-item si-3"><div class="si-bar" style="background:linear-gradient(90deg,var(--cyan),var(--purple))"></div></div>
-      <div class="strip-item si-6"><div class="si-text" style="color:rgba(255,45,155,0.25)">PIXEL</div></div>
-      <div class="strip-item si-2"><div class="si-grid"><div class="si-block" style="background:rgba(123,47,255,0.1)"></div><div class="si-block"></div><div class="si-block"></div><div class="si-block" style="background:rgba(0,212,232,0.1)"></div></div></div>
-      <div class="strip-item si-4"><div class="si-circle" style="width:80px;height:80px;background:radial-gradient(circle,rgba(123,47,255,0.2),transparent)"></div></div>
-      <div class="strip-item si-1"><div class="si-text" style="color:rgba(123,47,255,0.25)">COLOR</div></div>
-      <div class="strip-item si-5"><div class="si-lines"><div class="si-line" style="width:180px;background:rgba(0,212,232,0.2)"></div><div class="si-line" style="width:120px"></div><div class="si-line" style="width:160px;background:rgba(123,47,255,0.2)"></div></div></div>
-      <div class="strip-item si-3"><div class="si-bar" style="width:80px"></div></div>
-      <div class="strip-item si-6"><div class="si-shape" style="border-color:rgba(123,47,255,0.3);width:90px;height:90px"></div></div>
+<!-- ═══════════════════════════════════════════
+     SECTION 11 — THIRD STICKY PARALLAX
+═══════════════════════════════════════════ -->
+<div class="sticky-scene" style="height:180vh">
+  <div class="sticky-wrap">
+    <img class="img-full" id="par4" src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1920&q=80" alt="Creative work">
+    <div class="img-overlay" style="background:linear-gradient(to bottom,rgba(6,4,15,.3),rgba(6,4,15,.7) 80%)"></div>
+    <div class="scene-text">
+      <h2 class="rev" style="opacity:0;font-size:clamp(48px,8vw,130px)">YOUR BRAND IS<br>THE DEVICE.<br>WE BUILD IT.</h2>
     </div>
   </div>
 </div>
 
-<!-- WHY ASSET -->
-<section class="section">
-  <div class="reveal">
-    <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="width:24px;height:1px;background:var(--pink);display:block"></span>Why ASSET</p>
-    <h2 style="font-family:var(--font-display);font-size:clamp(44px,5.5vw,88px);line-height:0.9;max-width:700px;">WE BUILD<br>BUSINESSES,<br>NOT JUST BRANDS.</h2>
+<!-- ═══════════════════════════════════════════
+     SECTION 12 — CTA
+═══════════════════════════════════════════ -->
+<section id="dcta">
+  <div class="cta-bg-glow"></div>
+  <p style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--pink);margin-bottom:28px;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px" class="rev"><span style="width:32px;height:1px;background:var(--pink);display:block"></span>Ready to Begin?<span style="width:32px;height:1px;background:var(--pink);display:block"></span></p>
+  <h2 class="rev">LET'S BUILD<br>SOMETHING<br><span class="g">UNFORGETTABLE.</span></h2>
+  <div class="cta-actions rev rd1" style="margin-top:48px">
+    <a href="index.html" class="btn-pk">Start Your Project →</a>
+    <a href="mailto:info@weareasset.co.uk" class="btn-gh">info@weareasset.co.uk →</a>
   </div>
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">
-        <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="rgba(255,45,155,0.6)" stroke-width="1"/><path d="M16 24l5 5 11-11" stroke="rgba(255,45,155,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <h3 class="why-title">STRATEGY FIRST</h3>
-      <p class="why-desc">We never open a design tool until we understand your market, your audience, and your ambition. That's what separates decoration from design that drives revenue.</p>
-    </div>
-    <div class="why-card reveal reveal-delay-1">
-      <div class="why-icon">
-        <svg viewBox="0 0 48 48" fill="none"><path d="M8 40 L24 8 L40 40" stroke="rgba(0,212,232,0.6)" stroke-width="1"/><path d="M14 28h20" stroke="rgba(0,212,232,0.4)" stroke-width="1"/></svg>
-      </div>
-      <h3 class="why-title">BOUTIQUE QUALITY</h3>
-      <p class="why-desc">No account managers. No junior designers. You work directly with senior creatives who are invested in your success — from first brief to final delivery.</p>
-    </div>
-    <div class="why-card reveal reveal-delay-2">
-      <div class="why-icon">
-        <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" stroke="rgba(123,47,255,0.6)" stroke-width="1"/><rect x="26" y="8" width="14" height="14" stroke="rgba(123,47,255,0.4)" stroke-width="1"/><rect x="8" y="26" width="14" height="14" stroke="rgba(123,47,255,0.4)" stroke-width="1"/><circle cx="33" cy="33" r="7" stroke="rgba(255,45,155,0.6)" stroke-width="1"/></svg>
-      </div>
-      <h3 class="why-title">FULL SPECTRUM</h3>
-      <p class="why-desc">Three disciplines under one roof — graphic design, AI advertising, and UI — means your brand stays consistent across every channel, campaign, and screen.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">
-        <svg viewBox="0 0 48 48" fill="none"><path d="M24 6 L30 18 L44 20 L34 30 L36 44 L24 38 L12 44 L14 30 L4 20 L18 18Z" stroke="rgba(255,45,155,0.6)" stroke-width="1"/></svg>
-      </div>
-      <h3 class="why-title">PROVEN RESULTS</h3>
-      <p class="why-desc">140+ projects. 98% retention rate. Clients come back because the work moves the needle — not just the needle on the mood board, but the one on their revenue dashboard.</p>
-    </div>
-    <div class="why-card reveal reveal-delay-1">
-      <div class="why-icon">
-        <svg viewBox="0 0 48 48" fill="none"><path d="M8 36 Q24 8 40 36" stroke="rgba(0,212,232,0.6)" stroke-width="1" fill="none"/><circle cx="24" cy="26" r="6" stroke="rgba(0,212,232,0.5)" stroke-width="1"/></svg>
-      </div>
-      <h3 class="why-title">AI-ACCELERATED</h3>
-      <p class="why-desc">We use the latest generative tools not to replace creative thinking, but to amplify it. More iterations, faster timelines, same uncompromising quality standard.</p>
-    </div>
-    <div class="why-card reveal reveal-delay-2">
-      <div class="why-icon">
-        <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="14" width="36" height="24" rx="3" stroke="rgba(255,45,155,0.5)" stroke-width="1"/><path d="M6 20h36" stroke="rgba(255,45,155,0.3)" stroke-width="1"/><circle cx="13" cy="17" r="1.5" fill="rgba(255,45,155,0.5)"/><circle cx="19" cy="17" r="1.5" fill="rgba(255,45,155,0.3)"/></svg>
-      </div>
-      <h3 class="why-title">PIXEL PERFECT</h3>
-      <p class="why-desc">Every asset delivered is production-ready, properly structured, and built to last. No sloppy handoffs, no re-exports at 3am before launch — just clean, considered craft.</p>
-    </div>
-  </div>
-</section>
-
-<!-- STATEMENT 2 -->
-<div class="statement">
-  <div class="statement-glow"></div>
-  <h2 class="reveal">YOUR BRAND IS<br><em>the device.</em><br>WE BUILD IT.</h2>
-  <p class="reveal reveal-delay-1">The most powerful tool your business has isn't software or hardware — it's the way it looks, feels, and makes people feel. That's what we craft.</p>
-</div>
-
-<!-- CTA -->
-<section id="device-cta">
-  <div class="cta-glow"></div>
-  <h2 class="cta-title reveal">READY TO<br><span class="grad">GET STARTED?</span></h2>
-  <p class="cta-sub reveal reveal-delay-1">Join 140+ ambitious brands who chose to be unforgettable.</p>
-  <div class="reveal reveal-delay-2">
-    <a href="index.html" class="btn-primary" onclick="setTimeout(()=>{document.getElementById('open-contact')&&document.getElementById('open-contact').click()},200)">
-      Start Your Project
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-  <p style="font-size:12px;color:var(--white-dimmer);margin-top:24px;" class="reveal reveal-delay-3">Free 30-minute strategy call · No commitment required</p>
+  <p class="cta-fine rev rd2">Free 30-minute strategy call · No commitment required</p>
 </section>
 
 <!-- FOOTER -->
-<footer class="device-footer">
-  <div class="device-footer-logo">
+<footer>
+  <div class="fl">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 545.1 197.7">
       <polygon points="88.7 112.1 98.4 135 98.6 134.9 88.9 112.1 88.7 112.1" fill="#fff"/>
       <polygon points="69.3 65.1 69 65.6 85.2 103.8 85.5 103.8 69.3 65.1" fill="#fff"/>
@@ -553,32 +462,67 @@
       <polygon points="483 135.2 492 135.2 492 131.2 483 135.1 483 135.2" fill="#fff"/>
     </svg>
   </div>
-  <div class="device-footer-links">
+  <div class="flinks">
     <a href="index.html">Home</a>
     <a href="index.html#services">Services</a>
     <a href="index.html#work">Work</a>
     <a href="device.html">The Device</a>
+    <a href="mailto:info@weareasset.co.uk">Contact</a>
   </div>
-  <p class="device-footer-copy">© 2026 ASSET Studio</p>
+  <p class="fcopy">© 2026 ASSET Studio</p>
 </footer>
 
 <script>
-  // CURSOR
-  const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function animC(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);})();
-  document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));});
-  document.addEventListener('mouseleave',()=>{dot.style.opacity='0';ring.style.opacity='0';});
-  document.addEventListener('mouseenter',()=>{dot.style.opacity='1';ring.style.opacity='1';});
+// ── CURSOR
+const cd=document.getElementById('cur-d'),cr=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){cd.style.left=mx+'px';cd.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button').forEach(e=>{e.addEventListener('mouseenter',()=>document.body.classList.add('ch'));e.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));});
+document.addEventListener('mouseleave',()=>{cd.style.opacity='0';cr.style.opacity='0';});
+document.addEventListener('mouseenter',()=>{cd.style.opacity='1';cr.style.opacity='1';});
 
-  // NAV
-  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40),{passive:true});
+// ── NAV SCROLL
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s',scrollY>40),{passive:true});
 
-  // REVEAL
-  document.querySelectorAll('.reveal').forEach(el=>{
-    new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1}).observe(el);
+// ── REVEAL ON SCROLL
+const revEls=document.querySelectorAll('.rev');
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1});
+revEls.forEach(e=>ro.observe(e));
+
+// ── PARALLAX IMAGES
+const pars=[
+  {el:document.getElementById('par1'),speed:0.25},
+  {el:document.getElementById('par2'),speed:0.2},
+  {el:document.getElementById('par3'),speed:0.18},
+  {el:document.getElementById('par4'),speed:0.22},
+];
+function updateParallax(){
+  pars.forEach(({el,speed})=>{
+    if(!el) return;
+    const rect=el.parentElement.parentElement.getBoundingClientRect();
+    const center=rect.top+rect.height/2-window.innerHeight/2;
+    el.style.transform=`translateY(${center*speed}px) scale(1.16)`;
   });
+}
+window.addEventListener('scroll',updateParallax,{passive:true});
+updateParallax();
+
+// ── HORIZONTAL SCROLL GALLERY
+(function(){
+  const scene=document.getElementById('hscene');
+  const track=document.getElementById('htrack');
+  if(!scene||!track)return;
+  function update(){
+    const rect=scene.getBoundingClientRect();
+    const total=scene.offsetHeight-window.innerHeight;
+    const progress=Math.max(0,Math.min(1,-rect.top/total));
+    const maxShift=track.scrollWidth-window.innerWidth;
+    track.style.transform=`translateX(${-maxShift*progress}px)`;
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
 </script>
 </body>
 </html>
