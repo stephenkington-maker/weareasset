@@ -288,8 +288,17 @@ nav.scrolled{background:rgba(13,12,10,0.9);backdrop-filter:blur(24px);border-bot
 /* ════════════════════════════════════
    WORK CAROUSEL
 ════════════════════════════════════ */
-#work{padding:140px 0 140px 48px;overflow:hidden}
-.work-header{margin-bottom:64px;padding-right:48px;max-width:1440px}
+#work{background:#F4F1EB!important;width:100%}
+#work .sec-tag{color:var(--olive2)}
+#work .sec-tag::before{background:var(--olive2)}
+#work .sec-title{color:#1a1814}
+#work .work-dot{background:rgba(26,24,20,0.15)}
+#work .work-dot.active{background:var(--olive2)}
+#work .work-btn{border-color:rgba(26,24,20,0.15);color:#1a1814}
+#work .work-btn:hover{border-color:var(--olive2);background:rgba(109,118,80,0.08)}
+#work .case-label{background:rgba(244,241,235,0.85);color:rgba(26,24,20,0.6);border-color:rgba(26,24,20,0.1)}
+#work{padding:140px 0 140px max(48px, calc((100vw - 1344px)/2));overflow:hidden;width:100%}
+.work-header{margin-bottom:64px;padding-right:max(48px, calc((100vw - 1344px)/2));max-width:none}
 .work-carousel-wrap{position:relative}
 .work-track-outer{overflow:hidden;cursor:grab}
 .work-track-outer.dragging{cursor:grabbing}
