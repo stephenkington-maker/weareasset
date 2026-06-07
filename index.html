@@ -465,14 +465,28 @@
     pointer-events: none;
   }
   .stmt-text {
-    font-family: var(--font-serif);
-    font-size: clamp(32px, 5vw, 76px);
-    font-style: italic; font-weight: 400;
-    line-height: 1.15;
+    font-family: var(--font-body);
+    font-size: clamp(28px, 4.5vw, 68px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;
+    color: var(--white);
   }
-  .stmt-text .c-pink { color: var(--pink); }
-  .stmt-text .c-cyan { color: var(--olive); }
+  .stmt-text .c-pink {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--pink);
+    letter-spacing: 0;
+  }
+  .stmt-text .c-cyan {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--olive);
+    letter-spacing: 0;
+  }
   .stmt-sub { font-family: var(--font-alt); font-size: 16px; font-weight: 300; line-height: 1.7; color: var(--white-dim); max-width: 480px; margin: 36px auto 0; position: relative; z-index: 1; }
 
   /* PROCESS */
@@ -975,7 +989,7 @@
 <section id="statement">
   <div class="stmt-glow"></div>
   <h2 class="stmt-text reveal-scale">
-    <span class="c-pink">GREAT DESIGN</span> ISN'T DECORATION — IT'S THE DISTANCE BETWEEN A BRAND THAT SURVIVES AND ONE THAT <span class="c-cyan">DOMINATES.</span>
+    <span class="c-pink">Great design</span> isn't decoration — it's the distance between a brand that survives and one that <span class="c-cyan">dominates.</span>
   </h2>
   <p class="stmt-sub reveal reveal-delay-3">We obsess over the details so your customers feel the difference, even if they can't explain why.</p>
 </section>
