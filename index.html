@@ -621,37 +621,10 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
     </div>
   </div>
 
-  <!-- SLIDE 4 -->
-  <div class="hc-slide">
-    <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1920&q=80')"></div>
-    <div class="hc-overlay"></div>
-    <div class="hc-tag">
-      <div class="hc-tag-box">
-        <div class="hc-tag-dot"></div>
-        <div class="hc-tag-text">
-          <div class="hc-tag-label">Packaging Design</div>
-          <div class="hc-tag-sub">Brand Touchpoints · 2024</div>
-        </div>
-      </div>
-    </div>
-    <div class="hc-content">
-      <div class="hc-eyebrow">ASSET Studio — Brand & Packaging</div>
-      <div class="hc-title">
-        <div class="hc-t1"><span>Identity</span></div>
-        <div class="hc-t2"><span>that endures.</span></div>
-        <div class="hc-t3"><span>Every touchpoint considered.</span></div>
-      </div>
-      <div class="hc-pills">
-        <span class="hc-pill">Packaging Design</span>
-        <span class="hc-pill">Brand Systems</span>
-        <span class="hc-pill">Print & Digital</span>
-      </div>
-    </div>
-  </div>
 
   <!-- NAV -->
   <div class="hc-nav">
-    <span class="hc-counter"><span id="hc-curr">01</span><span style="color:rgba(255,255,255,.25);margin:0 4px">/</span><span style="color:rgba(255,255,255,.4)">04</span></span>
+    <span class="hc-counter"><span id="hc-curr">01</span><span style="color:rgba(255,255,255,.25);margin:0 4px">/</span><span style="color:rgba(255,255,255,.4)">03</span></span>
     <div class="hc-prog-track"><div class="hc-prog-fill" id="hc-prog-fill"></div></div>
     <div class="hc-arrows">
       <button class="hc-arrow" id="hc-prev">←</button>
@@ -902,7 +875,6 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     {img:"hero-bg.png",label:"Graphic Design"},
     {img:"https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=70",label:"AI Ad Design"},
     {img:"https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=70",label:"UI/UX Design"},
-    {img:"https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&q=70",label:"Packaging Design"},
   ];
 
   function goTo(idx){
@@ -917,7 +889,7 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     const next=(cur+1)%TOTAL;
     if(prevImg) prevImg.style.backgroundImage=`url('${slideData[next].img}')`;
     if(prevType) prevType.textContent=slideData[next].label;
-    if(prevCard) prevCard.style.opacity=cur===TOTAL-1?'0':'';
+    // always show preview (loops back to first)
   }
 
   if(prevBtn) prevBtn.addEventListener('click',()=>goTo(cur-1));
@@ -938,7 +910,7 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
   document.getElementById('hero-sticky').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)goTo(dx<0?cur+1:cur-1);});
 
   // Init preview
-  if(prevImg){prevImg.style.backgroundImage=`url('${slideData[1].img}')`;prevType.textContent=slideData[1].label;}
+  if(prevImg){prevImg.style.backgroundImage=`url('${slideData[1].img}')`;if(prevType)prevType.textContent=slideData[1].label;}
   goTo(0);
 })();
 
