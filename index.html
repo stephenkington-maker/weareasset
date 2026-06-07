@@ -117,7 +117,7 @@
 
   .hero-img {
     position: absolute; inset: -12%; z-index: 0;
-    background: url('hero-bg.png') center center / cover no-repeat; opacity: 0.55;
+    background: url('hero-bg.png') center center / cover no-repeat;
     transform-origin: center;
     animation: heroWarp 22s ease-in-out infinite;
   }
@@ -134,8 +134,8 @@
   .hero-img-overlay {
     position: absolute; inset: 0; z-index: 1;
     background:
-      linear-gradient(to top, rgba(6,4,15,0.95) 0%, rgba(6,4,15,0.6) 35%, rgba(6,4,15,0.15) 65%, transparent 100%),
-      linear-gradient(to right, rgba(6,4,15,0.4) 0%, transparent 60%);
+      linear-gradient(to top, rgba(30,26,20,0.97) 0%, rgba(30,26,20,0.75) 40%, rgba(30,26,20,0.35) 70%, transparent 100%),
+      linear-gradient(to right, rgba(20,18,14,0.5) 0%, transparent 70%);
   }
   .hero-scanlines {
     position: absolute; inset: 0; z-index: 2; pointer-events: none;
@@ -156,8 +156,7 @@
     animation: fadeUp 0.8s var(--ease) 0.4s forwards;
   }
   .hero-eyebrow::before {
-    content: ''; width: 32px; height: 1px; background: var(--pink);
-    box-shadow: 0 0 8px var(--pink);
+    content: ''; width: 32px; height: 1px; background: rgba(200,154,147,0.8);
   }
 
   .hero-headline {
@@ -178,38 +177,17 @@
   .hero-headline .line:nth-child(3) span { animation-delay: 0.85s; }
   .hero-headline .grad {
     display: inline-block;
-    background: linear-gradient(90deg,
-      #e020c8,
-      #ff2d9b,
-      #00d4e8,
-      #7b2fff,
-      #00d4e8,
-      #ff2d9b,
-      #e020c8,
-      #ff2d9b,
-      #00d4e8,
-      #7b2fff,
-      #00d4e8,
-      #ff2d9b,
-      #e020c8
-    );
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    animation: gradPan 3s linear infinite;
-  }
-  @keyframes gradPan {
-    0%   { background-position: 0% 0%; }
-    100% { background-position: 100% 0%; }
+    color: rgba(244,241,235,0.72);
+    font-weight: 400;
+    -webkit-text-fill-color: rgba(244,241,235,0.72);
   }
 
   .hero-sub {
     position: relative; z-index: 3;
     max-width: 480px; font-family: var(--font-alt);
     font-size: 16px; font-weight: 300; line-height: 1.7;
-    color: var(--white-dim); margin-top: 36px; font-style: italic; font-family: var(--font-serif); font-size: 17px;
+    color: rgba(244,241,235,0.75); margin-top: 28px;
+    font-family: var(--font-serif); font-style: italic; font-size: clamp(16px,2vw,22px);
     opacity: 0; transform: translateY(20px);
     animation: fadeUp 0.9s var(--ease) 1s forwards;
   }
@@ -236,11 +214,11 @@
     display: inline-flex; align-items: center; gap: 10px;
     font-family: var(--font-alt); font-size: 11px; font-weight: 500;
     letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-    color: var(--white-dim); border: 1px solid var(--border);
+    color: rgba(244,241,235,0.7); border: 1px solid rgba(244,241,235,0.25);
     padding: 15px 28px; border-radius: 2px;
     transition: color 0.2s, border-color 0.2s, background 0.2s;
   }
-  .btn-ghost:hover { color: var(--white); border-color: var(--olive); background: rgba(109,118,80,0.06); }
+  .btn-ghost:hover { color: #F4F1EB; border-color: rgba(244,241,235,0.6); }
   .btn-ghost .arrow { transition: transform 0.2s var(--ease); }
   .btn-ghost:hover .arrow { transform: translateX(4px); }
 
@@ -670,10 +648,10 @@
   <h1 class="hero-headline">
     <span class="line"><span>Design that</span></span>
     <span class="line"><span><span class="grad">moves markets.</span></span></span>
-    <span class="line"><span>Brands built to win.</span></span>
+    <span class="line"><span style="font-weight:400;color:rgba(244,241,235,0.65)">Brands built to win.</span></span>
   </h1>
 
-  <p class="hero-sub"><em>We craft brand identities, AI-powered campaigns, and digital experiences for ambitious businesses built to last.</em></p>
+  <p class="hero-sub">We craft brand identities, AI-powered campaigns,<br>and digital experiences for ambitious businesses built to last.</p>
 
   <div class="hero-actions">
     <a href="#" class="btn-primary" id="open-contact-hero">
