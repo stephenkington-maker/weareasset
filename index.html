@@ -653,79 +653,140 @@
 <!-- HERO -->
 <div id="hero-lock">
 <div id="hero-sticky">
-<section id="hero">
-  <!-- bg handled by hero-bg-slides -->
-  <div class="hero-scanlines"></div>
-  <canvas id="particles-canvas"></canvas>
 
-  <p class="hero-eyebrow">Premium Design Studio — Est. 2019</p>
+<!-- HERO CAROUSEL -->
+<div id="hero-carousel">
 
-  <div class="hero-messages" id="hero-messages">
-    <div class="hero-msg active" data-img="hero-bg.png">
-      <h1 class="hero-headline">
-        <span class="line"><span>Design that</span></span>
-        <span class="line"><span><span class="grad">moves markets.</span></span></span>
-        <span class="line"><span class="hero-line3">Brands built to win.</span></span>
-      </h1>
+  <!-- SLIDES -->
+  <div class="hc-slides" id="hc-slides">
+
+    <!-- Slide 1 -->
+    <div class="hc-slide active" data-index="0">
+      <div class="hc-bg" style="background-image:url('hero-bg.png')"></div>
+      <div class="hc-overlay"></div>
+      <!-- Top right: project type tag -->
+      <div class="hc-tag">
+        <span class="hc-tag-label">Graphic Design</span>
+        <span class="hc-tag-year">2024</span>
+      </div>
+      <!-- Main content -->
+      <div class="hc-content">
+        <div class="hc-eyebrow">ASSET Studio — Premium Design</div>
+        <h1 class="hc-title">
+          <span class="hc-t1">Design that</span>
+          <span class="hc-t2"><em>moves markets.</em></span>
+          <span class="hc-t3">Brands built to win.</span>
+        </h1>
+        <!-- Bottom left: service pills -->
+        <div class="hc-pills">
+          <span class="hc-pill">Brand Identity</span>
+          <span class="hc-pill">Visual Strategy</span>
+          <span class="hc-pill">Art Direction</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-msg" data-img="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80">
-      <h1 class="hero-headline">
-        <span class="line"><span>Identity</span></span>
-        <span class="line"><span><span class="grad">that endures.</span></span></span>
-        <span class="line"><span class="hero-line3">Built from the ground up.</span></span>
-      </h1>
+
+    <!-- Slide 2 -->
+    <div class="hc-slide" data-index="1">
+      <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80')"></div>
+      <div class="hc-overlay"></div>
+      <div class="hc-tag">
+        <span class="hc-tag-label">AI Ad Design</span>
+        <span class="hc-tag-year">2024</span>
+      </div>
+      <div class="hc-content">
+        <div class="hc-eyebrow">ASSET Studio — AI-Powered Creative</div>
+        <h1 class="hc-title">
+          <span class="hc-t1">Campaigns</span>
+          <span class="hc-t2"><em>that convert.</em></span>
+          <span class="hc-t3">AI-powered. Human-led.</span>
+        </h1>
+        <div class="hc-pills">
+          <span class="hc-pill">AI Ad Design</span>
+          <span class="hc-pill">Performance Creative</span>
+          <span class="hc-pill">A/B Variants</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-msg" data-img="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1920&q=80">
-      <h1 class="hero-headline">
-        <span class="line"><span>Campaigns</span></span>
-        <span class="line"><span><span class="grad">that convert.</span></span></span>
-        <span class="line"><span class="hero-line3">AI-powered. Human-led.</span></span>
-      </h1>
+
+    <!-- Slide 3 -->
+    <div class="hc-slide" data-index="2">
+      <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1547658719-da2b51169166?w=1920&q=80')"></div>
+      <div class="hc-overlay"></div>
+      <div class="hc-tag">
+        <span class="hc-tag-label">UI/UX Design</span>
+        <span class="hc-tag-year">2024</span>
+      </div>
+      <div class="hc-content">
+        <div class="hc-eyebrow">ASSET Studio — Digital Experience</div>
+        <h1 class="hc-title">
+          <span class="hc-t1">Interfaces</span>
+          <span class="hc-t2"><em>that perform.</em></span>
+          <span class="hc-t3">From brief to brilliance.</span>
+        </h1>
+        <div class="hc-pills">
+          <span class="hc-pill">UX / UI Design</span>
+          <span class="hc-pill">SaaS Dashboards</span>
+          <span class="hc-pill">Design Systems</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-msg" data-img="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80">
-      <h1 class="hero-headline">
-        <span class="line"><span>Interfaces</span></span>
-        <span class="line"><span><span class="grad">that perform.</span></span></span>
-        <span class="line"><span class="hero-line3">From brief to brilliance.</span></span>
-      </h1>
+
+    <!-- Slide 4 -->
+    <div class="hc-slide" data-index="3">
+      <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80')"></div>
+      <div class="hc-overlay"></div>
+      <div class="hc-tag">
+        <span class="hc-tag-label">Packaging Design</span>
+        <span class="hc-tag-year">2024</span>
+      </div>
+      <div class="hc-content">
+        <div class="hc-eyebrow">ASSET Studio — Brand & Packaging</div>
+        <h1 class="hc-title">
+          <span class="hc-t1">Identity</span>
+          <span class="hc-t2"><em>that endures.</em></span>
+          <span class="hc-t3">Every touchpoint considered.</span>
+        </h1>
+        <div class="hc-pills">
+          <span class="hc-pill">Packaging Design</span>
+          <span class="hc-pill">Brand Systems</span>
+          <span class="hc-pill">Print & Digital</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hc-slides -->
+
+  <!-- BOTTOM RIGHT: Next slide preview -->
+  <div class="hc-preview" id="hc-preview">
+    <div class="hc-preview-img" id="hc-preview-img"></div>
+    <div class="hc-preview-info">
+      <p class="hc-preview-label" id="hc-preview-label">AI Ad Design</p>
+      <p class="hc-preview-sub">Next project →</p>
     </div>
   </div>
 
-  <p class="hero-sub">We craft brand identities, AI-powered campaigns,<br>and digital experiences for ambitious businesses built to last.</p>
-
-  <div class="hero-actions">
-    <a href="#" class="btn-primary" id="open-contact-hero">
-      Begin Your Project
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <a href="#work" class="btn-ghost">
-      View Our Work <span class="arrow">→</span>
-    </a>
+  <!-- PROGRESS + NAV -->
+  <div class="hc-nav">
+    <div class="hc-counter"><span id="hc-curr">01</span><span class="hc-sep">/</span><span>04</span></div>
+    <div class="hc-prog-track"><div class="hc-prog-fill" id="hc-prog-fill"></div></div>
+    <div class="hc-arrows">
+      <button class="hc-arrow" id="hc-prev">←</button>
+      <button class="hc-arrow" id="hc-next">→</button>
+    </div>
   </div>
 
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll to explore
+  <!-- SCROLL HINT -->
+  <div class="hc-scroll-hint">
+    <div class="hc-scroll-line"></div>
+    <span>Scroll</span>
   </div>
-  <!-- BG SLIDES -->
-  <div id="hero-bg-slides">
-    <div class="hero-bg-slide active" style="background-image:url('hero-bg.png')"></div>
-    <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80')"></div>
-    <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1547658719-da2b51169166?w=1920&q=80')"></div>
-    <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80')"></div>
-  </div>
-  <!-- PROGRESS -->
-  <div class="hero-progress" id="hero-dots">
-    <div class="hero-prog-dot active"></div>
-    <div class="hero-prog-dot"></div>
-    <div class="hero-prog-dot"></div>
-    <div class="hero-prog-dot"></div>
-  </div>
-  <div class="hero-prog-bar" id="hero-prog-bar"></div>
-  <div class="hero-scroll-lock-hint"><div class="lock-line"></div>Scroll</div>
-</section>
-</div>
-</div>
+
+</div><!-- /hero-carousel -->
+
+</div><!-- /hero-sticky -->
+</div><!-- /hero-lock -->
+
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
@@ -1172,54 +1233,89 @@
     },{threshold:0.1}).observe(el);
   });
 
-  // ── HERO SCROLL LOCK
+  // ══════════════════════════════════
+  // HERO CAROUSEL
+  // ══════════════════════════════════
   (function() {
-    const lock       = document.getElementById('hero-lock');
-    const msgs       = document.querySelectorAll('.hero-msg');
-    const bgSlides   = document.querySelectorAll('.hero-bg-slide');
-    const dots       = document.querySelectorAll('.hero-prog-dot');
-    const progBar    = document.getElementById('hero-prog-bar');
-    const TOTAL      = msgs.length;
-    let current      = 0;
-    let locked       = false;
+    const lock    = document.getElementById('hero-lock');
+    const slides  = document.querySelectorAll('.hc-slide');
+    const progFill= document.getElementById('hc-prog-fill');
+    const currEl  = document.getElementById('hc-curr');
+    const prevBtn = document.getElementById('hc-prev');
+    const nextBtn = document.getElementById('hc-next');
+    const preview = document.getElementById('hc-preview');
+    const prevImg = document.getElementById('hc-preview-img');
+    const prevLbl = document.getElementById('hc-preview-label');
+    if (!lock || !slides.length) return;
 
-    function goTo(idx) {
-      if (idx === current) return;
-      msgs[current].classList.remove('active');
-      bgSlides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = Math.max(0, Math.min(idx, TOTAL - 1));
-      msgs[current].classList.add('active');
-      bgSlides[current].classList.add('active');
-      dots[current].classList.add('active');
+    const TOTAL = slides.length;
+    let current = 0;
+
+    // Slide data for preview
+    const slideData = [
+      { img: "hero-bg.png",                                                                    label: "Graphic Design"    },
+      { img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=70",          label: "AI Ad Design"      },
+      { img: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=70",          label: "UI/UX Design"      },
+      { img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=70",       label: "Packaging Design"  },
+    ];
+
+    function pad(n) { return String(n + 1).padStart(2, '0'); }
+
+    function goTo(idx, force) {
+      if (idx === current && !force) return;
+      slides[current].classList.remove('active');
+      current = ((idx % TOTAL) + TOTAL) % TOTAL;
+      slides[current].classList.add('active');
+
+      // Counter
+      if (currEl) currEl.textContent = pad(current);
+
+      // Progress bar
+      const pct = ((current + 1) / TOTAL) * 100;
+      if (progFill) progFill.style.width = pct + '%';
+
+      // Update preview — show NEXT slide
+      const nextIdx = (current + 1) % TOTAL;
+      const nextData = slideData[nextIdx];
+      if (prevImg) prevImg.style.backgroundImage = `url('${nextData.img}')`;
+      if (prevLbl) prevLbl.textContent = nextData.label;
+
+      // Hide preview on last slide
+      if (preview) preview.style.opacity = current === TOTAL - 1 ? '0' : '1';
     }
 
-    // Dot click
-    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+    // Arrow buttons
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
 
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+    });
+
+    // Scroll-driven
     window.addEventListener('scroll', () => {
       if (!lock) return;
-      const lockRect = lock.getBoundingClientRect();
-      const lockTop  = -lockRect.top;
-      const lockH    = lock.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, lockTop / lockH));
-
-      // Update progress bar
-      if (progBar) progBar.style.width = (progress * 100) + '%';
-
-      // Determine which message to show
-      const segSize = 1 / TOTAL;
-      const newIdx  = Math.min(TOTAL - 1, Math.floor(progress / segSize));
-      if (newIdx !== current) goTo(newIdx);
+      const lockTop = -lock.getBoundingClientRect().top;
+      const lockH   = lock.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(0.9999, lockTop / lockH));
+      const newIdx  = Math.min(TOTAL - 1, Math.floor(progress * TOTAL));
+      goTo(newIdx);
     }, { passive: true });
 
-    // Subtle parallax on active headline
-    window.addEventListener('scroll', () => {
-      const sy = window.scrollY;
-      document.querySelectorAll('.hero-msg.active .hero-headline').forEach(el => {
-        el.style.transform = `translateY(${Math.min(sy * 0.04, 30)}px)`;
-      });
+    // Touch/swipe
+    let touchStartX = 0;
+    document.getElementById('hc-slides').addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
     }, { passive: true });
+    document.getElementById('hc-slides').addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+    });
+
+    // Init
+    goTo(0, true);
   })();
 
   // FORM
@@ -1411,4 +1507,207 @@
   });
 </script>
 </body>
-</html>
+</html>  /* ══════════════════════════════════
+     HERO CAROUSEL
+  ══════════════════════════════════ */
+  #hero-lock { position: relative; height: 500vh; }
+  #hero-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+
+  #hero-carousel { position: relative; width: 100%; height: 100%; }
+
+  /* SLIDES */
+  .hc-slides { position: absolute; inset: 0; }
+  .hc-slide {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 0.85s var(--ease);
+    pointer-events: none;
+  }
+  .hc-slide.active { opacity: 1; pointer-events: all; }
+  .hc-slide.prev { opacity: 0; }
+
+  /* BG IMAGE */
+  .hc-bg {
+    position: absolute; inset: -8%;
+    background-size: cover; background-position: center;
+    animation: heroWarp 24s ease-in-out infinite;
+    transition: opacity 0.85s var(--ease);
+  }
+  /* OVERLAY — gradient from bottom-left */
+  .hc-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, rgba(10,9,7,0.82) 0%, rgba(10,9,7,0.5) 45%, rgba(10,9,7,0.1) 75%, transparent 100%),
+      linear-gradient(to top, rgba(10,9,7,0.6) 0%, transparent 45%);
+  }
+
+  /* TOP RIGHT TAG */
+  .hc-tag {
+    position: absolute; top: calc(var(--nav-h) + 20px); right: 40px;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+    opacity: 0; transform: translateY(-12px);
+    transition: opacity 0.6s var(--ease) 0.4s, transform 0.6s var(--ease) 0.4s;
+  }
+  .hc-slide.active .hc-tag { opacity: 1; transform: translateY(0); }
+  .hc-tag-label {
+    font-family: var(--font-alt); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #ffffff;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px; border-radius: 2px;
+  }
+  .hc-tag-year {
+    font-size: 10px; letter-spacing: 0.12em; color: rgba(255,255,255,0.45);
+  }
+
+  /* MAIN CONTENT */
+  .hc-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 60px 120px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .hc-eyebrow {
+    font-family: var(--font-alt); font-size: 11px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 20px;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.7s var(--ease) 0.15s, transform 0.7s var(--ease) 0.15s;
+  }
+  .hc-slide.active .hc-eyebrow { opacity: 1; transform: translateY(0); }
+
+  /* HEADLINE */
+  .hc-title {
+    display: flex; flex-direction: column; gap: 0;
+    margin-bottom: 36px;
+  }
+  .hc-t1, .hc-t2, .hc-t3 { display: block; overflow: hidden; }
+
+  .hc-t1 {
+    font-family: var(--font-body); font-size: clamp(44px, 7vw, 108px);
+    font-weight: 600; line-height: 1.0; letter-spacing: -0.02em;
+    color: #ffffff;
+    transform: translateY(110%);
+    transition: transform 0.8s var(--ease) 0.2s;
+  }
+  .hc-t2 {
+    font-family: var(--font-serif); font-size: clamp(44px, 7vw, 108px);
+    font-weight: 400; font-style: italic; line-height: 1.0;
+    color: var(--olive);
+    transform: translateY(110%);
+    transition: transform 0.8s var(--ease) 0.35s;
+  }
+  .hc-t3 {
+    font-family: var(--font-body); font-size: clamp(24px, 3vw, 44px);
+    font-weight: 300; line-height: 1.0; letter-spacing: -0.01em;
+    color: rgba(255,255,255,0.5);
+    transform: translateY(110%);
+    transition: transform 0.8s var(--ease) 0.48s;
+  }
+  .hc-slide.active .hc-t1,
+  .hc-slide.active .hc-t2,
+  .hc-slide.active .hc-t3 { transform: translateY(0); }
+
+  /* SERVICE PILLS */
+  .hc-pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.7s var(--ease) 0.55s, transform 0.7s var(--ease) 0.55s;
+  }
+  .hc-slide.active .hc-pills { opacity: 1; transform: translateY(0); }
+  .hc-pill {
+    font-family: var(--font-alt); font-size: 11px; font-weight: 400;
+    letter-spacing: 0.08em; color: rgba(255,255,255,0.85);
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: none;
+  }
+  .hc-pill:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.3); }
+
+  /* BOTTOM RIGHT: NEXT PREVIEW */
+  .hc-preview {
+    position: absolute; bottom: 48px; right: 40px;
+    width: 200px;
+    background: rgba(15,14,12,0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px; overflow: hidden;
+    cursor: none;
+    transition: transform 0.3s var(--ease), border-color 0.2s;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.8s var(--ease) 1.2s forwards;
+  }
+  .hc-preview:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.25); }
+  .hc-preview-img {
+    width: 100%; height: 110px;
+    background-size: cover; background-position: center;
+    transition: transform 0.5s var(--ease);
+  }
+  .hc-preview:hover .hc-preview-img { transform: scale(1.04); }
+  .hc-preview-info { padding: 14px 16px; }
+  .hc-preview-label {
+    font-family: var(--font-alt); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #ffffff; margin-bottom: 4px;
+  }
+  .hc-preview-sub {
+    font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+  }
+
+  /* BOTTOM NAV */
+  .hc-nav {
+    position: absolute; bottom: 40px; left: 60px;
+    display: flex; align-items: center; gap: 24px;
+    opacity: 0; animation: fadeUp 0.8s var(--ease) 1s forwards;
+  }
+  .hc-counter {
+    font-family: var(--font-body); font-size: 12px; font-weight: 400;
+    color: rgba(255,255,255,0.5); letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  #hc-curr { color: #ffffff; font-weight: 600; }
+  .hc-sep { opacity: 0.3; }
+  .hc-prog-track {
+    width: 120px; height: 1px;
+    background: rgba(255,255,255,0.15);
+    position: relative; overflow: hidden; border-radius: 2px;
+  }
+  .hc-prog-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: var(--olive);
+    transition: width 0.7s var(--ease);
+    width: 25%;
+  }
+  .hc-arrows { display: flex; gap: 8px; }
+  .hc-arrow {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+    color: #ffffff; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+  }
+  .hc-arrow:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.4); transform: scale(1.08); }
+
+  /* SCROLL HINT */
+  .hc-scroll-hint {
+    position: absolute; left: 60px; bottom: 140px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: var(--font-alt); font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    opacity: 0; animation: fadeUp 0.8s var(--ease) 1.6s forwards;
+    writing-mode: vertical-rl;
+    flex-direction: row;
+  }
+  .hc-scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+    animation: lockPulse 2s ease-in-out infinite;
+  }
+
+  /* ── HERO (legacy, keep for structure) ── */
