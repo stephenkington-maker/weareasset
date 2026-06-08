@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://weareasset.co.uk/sitemap.xml
