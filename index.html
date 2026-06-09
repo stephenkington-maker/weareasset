@@ -174,8 +174,7 @@ html{scroll-behavior:smooth}
   --fd:'Inter',system-ui,sans-serif;
   --fs:'Playfair Display',Georgia,serif;
 }
-html,body{overflow-x:hidden}
-body{background:var(--bg);color:var(--white);font-family:var(--fd);font-weight:300;cursor:none}
+body{background:var(--bg);color:var(--white);font-family:var(--fd);font-weight:300;overflow-x:hidden;cursor:none}
 body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;
   background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/180px}
 
@@ -393,7 +392,7 @@ nav.scrolled{background:rgba(13,12,10,0.9);backdrop-filter:blur(24px);border-bot
 #about .stat-card::before{background:var(--olive2)}
 #about .stat-num{color:var(--olive2)}
 #about .stat-label{color:rgba(26,24,20,0.5)}
-#about{padding:140px max(48px, calc((100vw - 1344px)/2));display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;overflow:hidden}
+#about{padding:140px max(48px, calc((100vw - 1344px)/2));display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
 .about-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--olive);margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .about-eyebrow::before{content:'';width:22px;height:1px;background:var(--olive)}
 .about-h{font-size:clamp(36px,4.5vw,62px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:24px}
@@ -616,8 +615,6 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 .reveal.visible{opacity:1;transform:none}
 .reveal-left{opacity:0;transform:translateX(-48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal-left.visible{opacity:1;transform:none}
-.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
 .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
 .rd1{transition-delay:.1s}.rd2{transition-delay:.22s}.rd3{transition-delay:.34s}.rd4{transition-delay:.46s}
@@ -643,8 +640,7 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
   .hc-preview{display:none}
   .hc-scroll-hint{display:none}
   .hc-tag{right:20px}
-  .hc-nav{left:50%;transform:translateX(-50%)}
-  .hc-overlay{background:linear-gradient(to bottom,rgba(10,9,7,.5) 0%,rgba(10,9,7,.85) 100%),linear-gradient(115deg,rgba(10,9,7,.88) 0%,rgba(10,9,7,.6) 50%,rgba(10,9,7,.2) 100%)!important}
+  .hc-nav{left:24px}
   .sec,.sec-inner,#about,#process,#cta,#testimonials{padding-left:20px;padding-right:20px}
   #services{padding-left:20px;padding-right:20px}
   #work{padding-left:20px}
@@ -842,15 +838,15 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 <section id="about">
   <div class="reveal-left">
     <div class="about-eyebrow">About ASSET</div>
-    <h2 class="about-h reveal-right">We don't just design.<br><em>We build conviction.</em></h2>
-    <div class="about-line reveal-right rd1"></div>
-    <p class="about-body reveal-right rd2">ASSET is a boutique creative studio operating at the intersection of strategy and visual culture. Every mark we make has intent, every campaign a singular goal: to make your brand the one they remember.</p>
+    <h2 class="about-h reveal">We don't just design.<br><em>We build conviction.</em></h2>
+    <div class="about-line reveal rd1"></div>
+    <p class="about-body reveal rd2">ASSET is a boutique creative studio operating at the intersection of strategy and visual culture. Every mark we make has intent, every campaign a singular goal: to make your brand the one they remember.</p>
   </div>
   <div class="about-stats">
-    <div class="stat-card reveal"><div class="stat-num" data-count="140" data-suffix="+"><span class="count-num">0</span><sup>+</sup></div><div class="stat-label">Projects Delivered</div></div>
-    <div class="stat-card reveal rd1"><div class="stat-num" data-count="98" data-suffix="%"><span class="count-num">0</span><sup>%</sup></div><div class="stat-label">Client Retention</div></div>
-    <div class="stat-card reveal rd2"><div class="stat-num" data-count="6" data-suffix="yr"><span class="count-num">0</span><sup>yr</sup></div><div class="stat-label">Studio Experience</div></div>
-    <div class="stat-card reveal rd3"><div class="stat-num" data-count="3" data-suffix="×"><span class="count-num">0</span><sup>×</sup></div><div class="stat-label">Avg Revenue Lift</div></div>
+    <div class="stat-card reveal"><div class="stat-num">140<sup>+</sup></div><div class="stat-label">Projects Delivered</div></div>
+    <div class="stat-card reveal rd1"><div class="stat-num">98<sup>%</sup></div><div class="stat-label">Client Retention</div></div>
+    <div class="stat-card reveal rd2"><div class="stat-num">6<sup>yr</sup></div><div class="stat-label">Studio Experience</div></div>
+    <div class="stat-card reveal rd3"><div class="stat-num">3<sup>×</sup></div><div class="stat-label">Avg Revenue Lift</div></div>
   </div>
 </section>
 
