@@ -174,7 +174,8 @@ html{scroll-behavior:smooth}
   --fd:'Inter',system-ui,sans-serif;
   --fs:'Playfair Display',Georgia,serif;
 }
-body{background:var(--bg);color:var(--white);font-family:var(--fd);font-weight:300;overflow-x:hidden;cursor:none}
+html,body{overflow-x:hidden}
+body{background:var(--bg);color:var(--white);font-family:var(--fd);font-weight:300;cursor:none}
 body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;
   background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/180px}
 
@@ -615,8 +616,8 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 .reveal.visible{opacity:1;transform:none}
 .reveal-left{opacity:0;transform:translateX(-48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal-left.visible{opacity:1;transform:none}
-.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.reveal-right.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
 .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
 .rd1{transition-delay:.1s}.rd2{transition-delay:.22s}.rd3{transition-delay:.34s}.rd4{transition-delay:.46s}
@@ -643,7 +644,7 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
   .hc-scroll-hint{display:none}
   .hc-tag{right:20px}
   .hc-nav{left:50%;transform:translateX(-50%)}
-  .hc-overlay{background:linear-gradient(115deg,rgba(10,9,7,.82) 0%,rgba(10,9,7,.7) 40%,rgba(10,9,7,.45) 70%,rgba(10,9,7,.2) 100%),linear-gradient(to top,rgba(10,9,7,.75) 0%,rgba(10,9,7,.1) 50%,transparent 70%)!important}
+  .hc-overlay{background:linear-gradient(to bottom,rgba(10,9,7,.5) 0%,rgba(10,9,7,.85) 100%),linear-gradient(115deg,rgba(10,9,7,.88) 0%,rgba(10,9,7,.6) 50%,rgba(10,9,7,.2) 100%)!important}
   .sec,.sec-inner,#about,#process,#cta,#testimonials{padding-left:20px;padding-right:20px}
   #services{padding-left:20px;padding-right:20px}
   #work{padding-left:20px}
