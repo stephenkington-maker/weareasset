@@ -1102,7 +1102,7 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     const segH=h/TOTAL;
     const segTop=top - cur*segH;
     const segP=segTop/segH; // 0..1 within current slide
-    const yShift=(segP-0.5)*18; // -9% to +9%
+    const yShift=(segP-0.5)*-18; // scroll down = image moves up
     document.querySelectorAll('.hc-slide.active .hc-bg').forEach(bg=>{
       bg.style.transform=`translateY(${yShift}%) scale(1.0)`;
     });
