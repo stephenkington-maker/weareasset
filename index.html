@@ -203,14 +203,8 @@ nav.scrolled{background:rgba(13,12,10,0.9);backdrop-filter:blur(24px);border-bot
 #hero-lock{position:relative;height:300vh}
 #hero-sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--bg)}
 
-.hc-slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
+.hc-slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .5s ease}
 .hc-slide.active{opacity:1;pointer-events:all}
-.hc-slide.leaving{opacity:0;transition:opacity .5s var(--ease)}
-
-/* bg blur crossfade */
-.hc-bg{transition:opacity .5s var(--ease), filter .5s var(--ease) !important}
-.hc-slide:not(.active) .hc-bg{filter:blur(8px) !important}
-.hc-slide.active .hc-bg{filter:blur(0px) !important}
 
 /* Background image */
 .hc-bg{
@@ -1078,12 +1072,7 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
   function goTo(idx){
     const newIdx=((idx%TOTAL)+TOTAL)%TOTAL;
     if(newIdx===cur) return;
-    // blur out outgoing, fade in incoming
-    const outgoing=slides[cur];
-    outgoing.classList.remove('active');
-    // brief blur on outgoing bg before it fades
-    const outBg=outgoing.querySelector('.hc-bg');
-    if(outBg){outBg.style.filter='blur(12px)';outBg.style.transition='filter .3s ease';}
+    slides[cur].classList.remove('active');
     cur=newIdx;
     slides[cur].classList.add('active');
     if(currEl) currEl.textContent=String(cur+1).padStart(2,'0');
