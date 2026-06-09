@@ -615,6 +615,8 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 .reveal.visible{opacity:1;transform:none}
 .reveal-left{opacity:0;transform:translateX(-48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal-right.visible{opacity:1;transform:none}
 .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
 .rd1{transition-delay:.1s}.rd2{transition-delay:.22s}.rd3{transition-delay:.34s}.rd4{transition-delay:.46s}
@@ -838,15 +840,15 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 <section id="about">
   <div class="reveal-left">
     <div class="about-eyebrow">About ASSET</div>
-    <h2 class="about-h reveal">We don't just design.<br><em>We build conviction.</em></h2>
-    <div class="about-line reveal rd1"></div>
-    <p class="about-body reveal rd2">ASSET is a boutique creative studio operating at the intersection of strategy and visual culture. Every mark we make has intent, every campaign a singular goal: to make your brand the one they remember.</p>
+    <h2 class="about-h reveal-right">We don't just design.<br><em>We build conviction.</em></h2>
+    <div class="about-line reveal-right rd1"></div>
+    <p class="about-body reveal-right rd2">ASSET is a boutique creative studio operating at the intersection of strategy and visual culture. Every mark we make has intent, every campaign a singular goal: to make your brand the one they remember.</p>
   </div>
   <div class="about-stats">
-    <div class="stat-card reveal"><div class="stat-num">140<sup>+</sup></div><div class="stat-label">Projects Delivered</div></div>
-    <div class="stat-card reveal rd1"><div class="stat-num">98<sup>%</sup></div><div class="stat-label">Client Retention</div></div>
-    <div class="stat-card reveal rd2"><div class="stat-num">6<sup>yr</sup></div><div class="stat-label">Studio Experience</div></div>
-    <div class="stat-card reveal rd3"><div class="stat-num">3<sup>×</sup></div><div class="stat-label">Avg Revenue Lift</div></div>
+    <div class="stat-card reveal"><div class="stat-num" data-count="140" data-suffix="+"><span class="count-num">0</span><sup>+</sup></div><div class="stat-label">Projects Delivered</div></div>
+    <div class="stat-card reveal rd1"><div class="stat-num" data-count="98" data-suffix="%"><span class="count-num">0</span><sup>%</sup></div><div class="stat-label">Client Retention</div></div>
+    <div class="stat-card reveal rd2"><div class="stat-num" data-count="6" data-suffix="yr"><span class="count-num">0</span><sup>yr</sup></div><div class="stat-label">Studio Experience</div></div>
+    <div class="stat-card reveal rd3"><div class="stat-num" data-count="3" data-suffix="×"><span class="count-num">0</span><sup>×</sup></div><div class="stat-label">Avg Revenue Lift</div></div>
   </div>
 </section>
 
