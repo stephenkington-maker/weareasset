@@ -1087,15 +1087,19 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 <script>
 // ── SMOOTH SCROLL
   const lenis = new Lenis({
-    duration: 1.2,
+    duration: 1.4,
     easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    wheelMultiplier: 0.8,
+    wheelMultiplier: 0.65,
+    touchMultiplier: 1.2,
   });
   function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
-  // Pass lenis scroll to our scroll listeners
-  lenis.on('scroll', () => window.dispatchEvent(new Event('scroll')));
+  // Use lenis scroll value directly for consistency — avoids double-firing
+  lenis.on('scroll', ({scroll}) => {
+    window._lenisScroll = scroll;
+    window.dispatchEvent(new CustomEvent('lenis-scroll', {detail:{scroll}}));
+  });
 
 // ── CURSOR
 const cd=document.getElementById('cur-d'),cr=document.getElementById('cur-r');
@@ -1111,6 +1115,7 @@ document.addEventListener('mouseenter',()=>{cd.style.opacity='1';cr.style.opacit
 
 // ── NAV
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40),{passive:true});
+  window.addEventListener('lenis-scroll',e=>document.getElementById('nav').classList.toggle('scrolled',e.detail.scroll>40),{passive:true});
 
 // ── HERO CAROUSEL
 (function(){
