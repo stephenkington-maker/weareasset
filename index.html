@@ -1216,7 +1216,7 @@ let mOpen=false;
 menuBtn.addEventListener('click',()=>{
   mOpen=!mOpen;
   if(mOpen){
-    navLinks.style.cssText='display:flex;flex-direction:column;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:rgba(13,12,10,.97);backdrop-filter:blur(20px);padding:48px 28px;gap:24px;z-index:99;align-items:flex-start;';
+    navLinks.style.cssText='display:flex;flex-direction:column;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:rgba(13,12,10,.5);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);padding:48px 28px;gap:24px;z-index:99;align-items:flex-start;';
     navLinks.querySelectorAll('a').forEach(a=>{a.style.cssText='font-size:32px;font-weight:600;letter-spacing:-.01em;color:#F4F1EB;text-transform:none;';});
   } else {
     navLinks.removeAttribute('style');
