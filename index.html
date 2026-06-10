@@ -201,20 +201,39 @@ nav.scrolled{background:rgba(13,12,10,0.9);backdrop-filter:blur(24px);border-bot
   flex-direction:column;
   position:fixed;
   top:var(--nav-h);left:0;right:0;bottom:0;
-  background:rgba(13,12,10,.5)!important;
-  backdrop-filter:blur(24px) saturate(1.4)!important;
-  -webkit-backdrop-filter:blur(24px) saturate(1.4)!important;
-  padding:48px 28px;
-  gap:24px;
+  background:rgba(13,12,10,.6)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  padding:40px 28px 40px 28px;
+  gap:20px;
   z-index:99;
   align-items:flex-start;
+  justify-content:flex-start;
+  overflow:hidden;
+}
+.nav-links.menu-open li,
+.nav-links.menu-open a{
+  width:100%!important;
+  display:block!important;
 }
 .nav-links.menu-open a{
-  font-size:32px!important;
+  font-size:28px!important;
   font-weight:600!important;
   letter-spacing:-.01em!important;
   color:#F4F1EB!important;
   text-transform:none!important;
+  padding:4px 0!important;
+}
+.nav-links.menu-open .nav-cta{
+  margin-left:0!important;
+  margin-top:8px!important;
+  display:inline-flex!important;
+  width:auto!important;
+  background:var(--olive)!important;
+  color:var(--bg)!important;
+  padding:12px 24px!important;
+  font-size:12px!important;
+  border-radius:2px!important;
 }
 
 /* ════════════════════════════════════
@@ -1238,11 +1257,32 @@ menuBtn.addEventListener('click',()=>{
   mOpen=!mOpen;
   if(mOpen){
     navLinks.classList.add('menu-open');
+    document.body.style.overflow='hidden';
+    document.body.style.position='fixed';
+    document.body.style.width='100%';
   } else {
     navLinks.classList.remove('menu-open');
+    document.body.style.overflow='';
+    document.body.style.position='';
+    document.body.style.width='';
   }
   menuBtn.children[0].style.transform=mOpen?'rotate(45deg) translate(4px,4px)':'';
   menuBtn.children[1].style.transform=mOpen?'rotate(-45deg) translate(4px,-4px)':'';
+
+  // Close menu when any link clicked
+  if(mOpen){
+    navLinks.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click',()=>{
+        mOpen=false;
+        navLinks.classList.remove('menu-open');
+        document.body.style.overflow='';
+        document.body.style.position='';
+        document.body.style.width='';
+        menuBtn.children[0].style.transform='';
+        menuBtn.children[1].style.transform='';
+      },{once:true});
+    });
+  }
 });
 
 // ── SCROLL REVEAL
