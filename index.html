@@ -541,6 +541,7 @@ body.menu-is-open .menu-email{display:block}
 .work-track-outer.dragging{cursor:grabbing}
 .work-track{display:flex;gap:3px;transition:transform .7s var(--ease);will-change:transform}
 .case-item{flex:0 0 72vw;max-width:1060px;aspect-ratio:16/6;position:relative;overflow:hidden;background:var(--surface);cursor:none}
+.case-item--tall{aspect-ratio:9/16;flex:0 0 38vw;max-width:420px}
 .case-item.small{flex:0 0 38vw;max-width:560px;aspect-ratio:3/4}
 .case-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .case-visual{width:100%;height:100%;transition:transform .7s var(--ease)}
@@ -1097,8 +1098,8 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
           <span class="case-label">Ad Creative</span>
           <div class="case-overlay"><p class="case-client">Icon Health</p><h3 class="case-title-txt">Bold campaign creative that moves people, drives action and builds brand recognition.</h3></div>
         </div>
-        <div class="case-item">
-          <div class="case-visual"><div class="case-bg" style="background:url('cryptolab.jpg') center/contain no-repeat;background-color:#0d0c18"></div></div>
+        <div class="case-item case-item--tall">
+          <div class="case-visual" style="height:100%"><div class="case-bg" style="height:100%;background:url('cryptolab.jpg') center top/contain no-repeat;background-color:#0d0c18"></div></div>
           <span class="case-label">App UI Design</span>
           <div class="case-overlay"><p class="case-client">CryptoLab</p><h3 class="case-title-txt">A full-featured crypto portfolio dashboard app with real-time analytics and a premium dark UI.</h3></div>
         </div>
