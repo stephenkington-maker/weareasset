@@ -494,6 +494,24 @@ body.menu-is-open .menu-email{display:block}
 .srv-card:hover .srv-arrow{border-color:var(--olive);background:rgba(154,166,122,.1);transform:rotate(45deg)}
 
 /* ════════════════════════════════════
+   SERVICES CAROUSEL
+════════════════════════════════════ */
+.svc-carousel-wrap{position:relative;margin-top:0}
+.svc-track-outer{overflow:hidden;cursor:grab}
+.svc-track-outer.dragging{cursor:grabbing}
+.svc-track{display:flex;gap:2px;transition:transform .7s var(--ease);will-change:transform}
+.svc-slide{flex:0 0 calc(33.333% - 2px);min-width:0}
+.svc-nav{display:flex;align-items:center;gap:16px;margin-top:24px;justify-content:flex-end}
+.svc-dots{display:flex;align-items:center;gap:6px;margin-right:auto}
+.svc-dot{width:5px;height:5px;border-radius:50%;background:var(--border);cursor:none;transition:background .3s,transform .3s}
+.svc-dot.active{background:var(--olive);transform:scale(1.5)}
+.svc-btn{width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--white);font-size:16px;cursor:none;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s,transform .2s var(--ease)}
+.svc-btn:hover{border-color:var(--olive);background:rgba(154,166,122,.08);transform:scale(1.08)}
+.svc-btn:disabled{opacity:.2;pointer-events:none}
+@media(max-width:1024px){.svc-slide{flex:0 0 calc(50% - 1px)}}
+@media(max-width:768px){.svc-slide{flex:0 0 85vw}}
+
+/* ════════════════════════════════════
    WORK CAROUSEL
 ════════════════════════════════════ */
 #work{background:#F4F1EB!important;width:100%}
@@ -914,41 +932,123 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 
 <!-- SERVICES -->
 <section id="services" style="position:relative;overflow:hidden">
-  <div class="services-inner">
-    <div class="sec-header">
-      <div>
-        <p class="sec-tag reveal-left">What We Do</p>
-        <h2 class="sec-title reveal rd1">Three disciplines.<br>One vision.</h2>
-      </div>
-      <p class="sec-desc reveal">Our services are engineered to work together, brands that are cohesive, compelling, and conversion-ready from day one.</p>
+<div id="services::before" style="display:none"></div>
+<div class="services-inner">
+  <div class="sec-header">
+    <div>
+      <p class="sec-tag reveal-left">What We Do</p>
+      <h2 class="sec-title reveal rd1">Nine disciplines.<br>One studio.</h2>
     </div>
-    <div class="services-grid">
-      <div class="srv-card reveal">
-        <div class="srv-num">01</div>
-        <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="4" y="4" width="14" height="14" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><rect x="22" y="4" width="14" height="14" stroke="rgba(154,166,122,0.35)" stroke-width="1"/><rect x="4" y="22" width="14" height="14" stroke="rgba(154,166,122,0.35)" stroke-width="1"/><circle cx="29" cy="29" r="7" stroke="rgba(200,154,147,0.6)" stroke-width="1"/></svg></div>
-        <h3 class="srv-name">Graphic<br>Design</h3>
-        <p class="srv-desc">Brand identities that command rooms. From logo systems and typography to full visual language, we build the aesthetic foundation your company stands on.</p>
-        <div class="srv-tags"><span class="srv-tag">Logo & Mark</span><span class="srv-tag">Brand Systems</span><span class="srv-tag">Art Direction</span></div>
-        <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="srv-card reveal rd1">
-        <div class="srv-num">02</div>
-        <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><path d="M22 4L38 13L38 31L22 40L6 31L6 13Z" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M22 14L30 19L30 27L22 32L14 27L14 19Z" stroke="rgba(200,154,147,0.5)" stroke-width="1"/><circle cx="22" cy="22" r="3" fill="rgba(154,166,122,0.5)"/></svg></div>
-        <h3 class="srv-name">AI Ad<br>Design</h3>
-        <p class="srv-desc">Campaigns that scale without compromise. AI-powered creative production guided by expert art direction, 100 variants in the time it used to take to produce 5.</p>
-        <div class="srv-tags"><span class="srv-tag">Meta Ads</span><span class="srv-tag">Performance Creative</span><span class="srv-tag">Video Ads</span></div>
-        <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="srv-card reveal rd2">
-        <div class="srv-num">03</div>
-        <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="3" y="9" width="38" height="26" rx="3" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M3 17h38" stroke="rgba(154,166,122,0.3)" stroke-width="1"/><circle cx="10" cy="13" r="1.5" fill="rgba(200,154,147,0.5)"/><circle cx="16" cy="13" r="1.5" fill="rgba(154,166,122,0.4)"/><rect x="8" y="22" width="11" height="8" rx="1" fill="rgba(154,166,122,0.08)" stroke="rgba(154,166,122,0.3)" stroke-width="1"/><rect x="23" y="22" width="14" height="3" rx="1" fill="rgba(154,166,122,0.15)"/><rect x="23" y="27" width="10" height="3" rx="1" fill="rgba(154,166,122,0.1)"/></svg></div>
-        <h3 class="srv-name">Website<br>UI Design</h3>
-        <p class="srv-desc">Interfaces that convert. Every scroll, hover, and click crafted to guide users toward action, and leave a lasting impression on every device.</p>
-        <div class="srv-tags"><span class="srv-tag">Landing Pages</span><span class="srv-tag">SaaS Dashboards</span><span class="srv-tag">Design Systems</span></div>
-        <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-      </div>
-    </div>
+    <p class="sec-desc reveal">Full-spectrum creative services for ambitious brands, startups, and businesses ready to stand out.</p>
   </div>
+
+  <!-- SERVICES CAROUSEL -->
+  <div class="svc-carousel-wrap">
+    <div class="svc-track-outer" id="svc-outer">
+      <div class="svc-track" id="svc-track">
+
+        <!-- 1. Website UI Design -->
+        <div class="srv-card svc-slide reveal">
+          <div class="srv-num">01</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="3" y="9" width="38" height="26" rx="3" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M3 17h38" stroke="rgba(154,166,122,0.3)" stroke-width="1"/><circle cx="10" cy="13" r="1.5" fill="rgba(200,154,147,0.5)"/><circle cx="16" cy="13" r="1.5" fill="rgba(154,166,122,0.4)"/><rect x="8" y="22" width="11" height="8" rx="1" fill="rgba(154,166,122,0.08)" stroke="rgba(154,166,122,0.3)" stroke-width="1"/><rect x="23" y="22" width="14" height="3" rx="1" fill="rgba(154,166,122,0.15)"/><rect x="23" y="27" width="10" height="3" rx="1" fill="rgba(154,166,122,0.1)"/></svg></div>
+          <h3 class="srv-name">Website<br>UI Design</h3>
+          <p class="srv-desc">Interfaces built to convert. From landing pages to SaaS dashboards, we craft digital experiences that guide users toward action and leave a lasting impression.</p>
+          <div class="srv-tags"><span class="srv-tag">Landing Pages</span><span class="srv-tag">SaaS Dashboards</span><span class="srv-tag">Design Systems</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 2. Graphic & Print Design -->
+        <div class="srv-card svc-slide reveal rd1">
+          <div class="srv-num">02</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="4" y="4" width="14" height="14" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><rect x="22" y="4" width="14" height="14" stroke="rgba(154,166,122,0.35)" stroke-width="1"/><rect x="4" y="22" width="14" height="14" stroke="rgba(154,166,122,0.35)" stroke-width="1"/><circle cx="29" cy="29" r="7" stroke="rgba(200,154,147,0.6)" stroke-width="1"/></svg></div>
+          <h3 class="srv-name">Graphic &<br>Print Design</h3>
+          <p class="srv-desc">Print collateral, editorial design, brochures, and visual systems that work beautifully in the physical world — from business cards to full-scale campaign materials.</p>
+          <div class="srv-tags"><span class="srv-tag">Brochures</span><span class="srv-tag">Editorial</span><span class="srv-tag">Collateral</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 3. 3D Visualisation -->
+        <div class="srv-card svc-slide reveal rd2">
+          <div class="srv-num">03</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><path d="M22 4L38 13V31L22 40L6 31V13L22 4Z" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M22 4V40M6 13L38 13M6 31L38 31" stroke="rgba(154,166,122,0.2)" stroke-width="1"/></svg></div>
+          <h3 class="srv-name">3D<br>Visualisation</h3>
+          <p class="srv-desc">Photorealistic 3D renders and visualisations for products, architecture, and brand environments. Bring concepts to life before they exist in the physical world.</p>
+          <div class="srv-tags"><span class="srv-tag">Product Renders</span><span class="srv-tag">Environments</span><span class="srv-tag">Animation</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 4. Packaging Design -->
+        <div class="srv-card svc-slide reveal">
+          <div class="srv-num">04</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="8" y="14" width="28" height="24" rx="2" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M8 20h28M22 14v24" stroke="rgba(154,166,122,0.3)" stroke-width="1"/><path d="M14 8l8 6 8-6" stroke="rgba(200,154,147,0.5)" stroke-width="1"/></svg></div>
+          <h3 class="srv-name">Packaging<br>Design</h3>
+          <p class="srv-desc">Shelf-stopping packaging that communicates brand values instantly. From concept through to print-ready artwork, we make your product impossible to ignore at point of sale.</p>
+          <div class="srv-tags"><span class="srv-tag">Retail</span><span class="srv-tag">E-commerce</span><span class="srv-tag">Print-ready</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 5. Brand Identity -->
+        <div class="srv-card svc-slide reveal rd1">
+          <div class="srv-num">05</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><circle cx="22" cy="22" r="8" stroke="rgba(154,166,122,0.3)" stroke-width="1"/><circle cx="22" cy="22" r="3" fill="rgba(200,154,147,0.6)"/></svg></div>
+          <h3 class="srv-name">Brand<br>Identity</h3>
+          <p class="srv-desc">Complete brand systems built from strategy up — logo, mark, colour, typography, tone of voice, and brand guidelines that ensure consistency across every touchpoint.</p>
+          <div class="srv-tags"><span class="srv-tag">Logo & Mark</span><span class="srv-tag">Brand Systems</span><span class="srv-tag">Guidelines</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 6. Ad Design -->
+        <div class="srv-card svc-slide reveal rd2">
+          <div class="srv-num">06</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="4" y="8" width="36" height="24" rx="3" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M14 36h16" stroke="rgba(154,166,122,0.4)" stroke-width="1" stroke-linecap="round"/><path d="M22 32v4" stroke="rgba(154,166,122,0.4)" stroke-width="1"/><rect x="10" y="14" width="10" height="8" rx="1" fill="rgba(200,154,147,0.15)" stroke="rgba(200,154,147,0.4)" stroke-width="1"/><rect x="24" y="14" width="10" height="3" rx="1" fill="rgba(154,166,122,0.2)"/><rect x="24" y="19" width="7" height="3" rx="1" fill="rgba(154,166,122,0.12)"/></svg></div>
+          <h3 class="srv-name">Ad Design &<br>Social Media</h3>
+          <p class="srv-desc">Performance-driven creative for paid advertising and organic social — static ads, carousel content, story formats and campaign assets designed to stop the scroll and drive results.</p>
+          <div class="srv-tags"><span class="srv-tag">Paid Ads</span><span class="srv-tag">Social Content</span><span class="srv-tag">Campaigns</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 7. Video & Motion -->
+        <div class="srv-card svc-slide reveal">
+          <div class="srv-num">07</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="4" y="10" width="28" height="20" rx="2" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M32 16l8-4v16l-8-4V16Z" stroke="rgba(154,166,122,0.5)" stroke-width="1"/><path d="M14 17l8 5-8 5V17Z" fill="rgba(200,154,147,0.3)" stroke="rgba(200,154,147,0.5)" stroke-width="1"/></svg></div>
+          <h3 class="srv-name">Video &<br>Motion Graphics</h3>
+          <p class="srv-desc">From brand films and social reels to animated explainers and motion identity — video content that captures attention, tells stories, and drives engagement across every platform.</p>
+          <div class="srv-tags"><span class="srv-tag">Brand Films</span><span class="srv-tag">Animation</span><span class="srv-tag">Social Reels</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 8. Product Photography -->
+        <div class="srv-card svc-slide reveal rd1">
+          <div class="srv-num">08</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="4" y="12" width="36" height="26" rx="3" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><circle cx="22" cy="25" r="7" stroke="rgba(154,166,122,0.5)" stroke-width="1"/><circle cx="22" cy="25" r="3" stroke="rgba(200,154,147,0.6)" stroke-width="1"/><path d="M15 12l3-5h8l3 5" stroke="rgba(154,166,122,0.4)" stroke-width="1"/><circle cx="34" cy="18" r="2" fill="rgba(154,166,122,0.4)"/></svg></div>
+          <h3 class="srv-name">Product<br>Photography</h3>
+          <p class="srv-desc">Studio-quality product photography styled and shot to make your products look their absolute best — for e-commerce, campaigns, packaging, and editorial use.</p>
+          <div class="srv-tags"><span class="srv-tag">E-commerce</span><span class="srv-tag">Campaign</span><span class="srv-tag">Editorial</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+        <!-- 9. AI Ad Design -->
+        <div class="srv-card svc-slide reveal rd2">
+          <div class="srv-num">09</div>
+          <div class="srv-icon"><svg viewBox="0 0 44 44" fill="none"><path d="M22 4L38 13L38 31L22 40L6 31L6 13Z" stroke="rgba(154,166,122,0.6)" stroke-width="1"/><path d="M22 14L30 19L30 27L22 32L14 27L14 19Z" stroke="rgba(200,154,147,0.5)" stroke-width="1"/><circle cx="22" cy="22" r="3" fill="rgba(154,166,122,0.5)"/></svg></div>
+          <h3 class="srv-name">AI Ad<br>Design</h3>
+          <p class="srv-desc">AI-powered creative production guided by expert art direction. Scale your ad creative output without scaling your budget — 100 variants where it used to take 5.</p>
+          <div class="srv-tags"><span class="srv-tag">Meta Ads</span><span class="srv-tag">Performance Creative</span><span class="srv-tag">A/B Testing</span></div>
+          <div class="srv-arrow"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="rgba(154,166,122,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+
+      </div><!-- /svc-track -->
+    </div><!-- /svc-outer -->
+
+    <!-- NAV -->
+    <div class="svc-nav">
+      <div class="svc-dots" id="svc-dots"></div>
+      <button class="svc-btn" id="svc-prev">←</button>
+      <button class="svc-btn" id="svc-next">→</button>
+    </div>
+  </div><!-- /svc-carousel-wrap -->
+
+</div><!-- /services-inner -->
 </section>
 
 <!-- WORK -->
@@ -1303,6 +1403,65 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
       document.querySelectorAll('.xfade-a').forEach(el => el.style.opacity = showA ? '1' : '0');
       document.querySelectorAll('.xfade-b').forEach(el => el.style.opacity = showA ? '0' : '1');
     }, 2000);
+  })();
+
+// ── SERVICES CAROUSEL
+  (function(){
+    const track=document.getElementById('svc-track');
+    const outer=document.getElementById('svc-outer');
+    const prevBtn=document.getElementById('svc-prev');
+    const nextBtn=document.getElementById('svc-next');
+    const dotsWrap=document.getElementById('svc-dots');
+    if(!track) return;
+    const slides=Array.from(track.querySelectorAll('.svc-slide'));
+    const GAP=2;
+    let cur=0;
+
+    // How many visible at once
+    function visCount(){ return window.innerWidth>=1024?3:window.innerWidth>=768?2:1; }
+
+    // Build dots (one per page)
+    function buildDots(){
+      dotsWrap.innerHTML='';
+      const pages=Math.ceil(slides.length/visCount());
+      for(let i=0;i<pages;i++){
+        const d=document.createElement('div');
+        d.className='svc-dot'+(i===0?' active':'');
+        d.addEventListener('click',()=>goTo(i*visCount()));
+        dotsWrap.appendChild(d);
+      }
+    }
+    buildDots();
+    window.addEventListener('resize',()=>{buildDots();goTo(0);},{passive:true});
+
+    function getOffset(idx){
+      let x=0;
+      for(let i=0;i<idx;i++) x+=slides[i].offsetWidth+GAP;
+      return x;
+    }
+
+    function goTo(idx){
+      cur=Math.max(0,Math.min(idx,slides.length-visCount()));
+      track.style.transform=`translateX(-${getOffset(cur)}px)`;
+      const page=Math.floor(cur/visCount());
+      document.querySelectorAll('.svc-dot').forEach((d,i)=>d.classList.toggle('active',i===page));
+      prevBtn.disabled=cur===0;
+      nextBtn.disabled=cur>=slides.length-visCount();
+    }
+
+    prevBtn.addEventListener('click',()=>goTo(cur-visCount()));
+    nextBtn.addEventListener('click',()=>goTo(cur+visCount()));
+
+    // Drag
+    let sx=0,dragging=false;
+    outer.addEventListener('mousedown',e=>{dragging=true;sx=e.clientX;outer.classList.add('dragging');});
+    outer.addEventListener('mousemove',e=>{if(!dragging)return;track.style.transform=`translateX(${-getOffset(cur)+(e.clientX-sx)}px)`;});
+    outer.addEventListener('mouseup',e=>{if(!dragging)return;dragging=false;outer.classList.remove('dragging');const dx=e.clientX-sx;if(Math.abs(dx)>60)goTo(dx<0?cur+visCount():cur-visCount());else goTo(cur);});
+    outer.addEventListener('mouseleave',()=>{if(dragging){dragging=false;outer.classList.remove('dragging');goTo(cur);}});
+    outer.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+    outer.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>60)goTo(dx<0?cur+visCount():cur-visCount());});
+
+    goTo(0);
   })();
 
 // ── CONTACT
