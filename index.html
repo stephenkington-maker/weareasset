@@ -265,8 +265,9 @@ body.menu-is-open .menu-email{display:block}
   will-change:transform;
 }
 @keyframes bgWarp{
-  0%  { transform: scale(1.0); }
-  100%{ transform: scale(1.05); }
+  0%   { transform: scale(1.0); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1.0); }
 }
 
 /* Dark vignette, heavy bottom-left for text, subtle right */
@@ -765,7 +766,7 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
     <li><a href="#work">Work</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#testimonials">Clients</a></li>
-    <li><a href="device.html" style="color:var(--olive)">The Device</a></li>
+    <!-- <li><a href="device.html" style="color:var(--olive)">The Device</a></li> -->
     <a href="#" class="nav-cta" id="open-contact">Start a Project</a>
   </ul>
   <a href="mailto:info@weareasset.co.uk" class="menu-email">info@weareasset.co.uk</a>
