@@ -266,8 +266,7 @@ body.menu-is-open .menu-email{display:block}
 }
 @keyframes bgWarp{
   0%   { transform: scale(1.0); }
-  50%  { transform: scale(1.08); }
-  100% { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
 }
 
 /* Dark vignette, heavy bottom-left for text, subtle right */
@@ -1255,6 +1254,9 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     slides[cur].classList.remove('active');
     cur=newIdx;
     slides[cur].classList.add('active');
+    // Restart Ken Burns on new slide
+    const bg=slides[cur].querySelector('.hc-bg');
+    if(bg){ bg.style.animation='none'; requestAnimationFrame(()=>{ bg.style.animation='bgWarp 4s ease-in-out forwards'; }); }
     if(currEl) currEl.textContent=String(cur+1).padStart(2,'0');
     if(progFill) progFill.style.width=((cur+1)/TOTAL*100)+'%';
     // Update preview
@@ -1264,8 +1266,19 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     if(prevCard) prevCard.classList.add('visible');
   }
 
-  if(prevBtn) prevBtn.addEventListener('click',()=>goTo(cur-1));
-  if(nextBtn) nextBtn.addEventListener('click',()=>goTo(cur+1));
+  if(prevBtn) prevBtn.addEventListener('click',()=>{ clearTimeout(autoTimer); goTo(cur-1); startAutoPlay(); });
+  if(nextBtn) nextBtn.addEventListener('click',()=>{ clearTimeout(autoTimer); goTo(cur+1); startAutoPlay(); });
+
+  // Auto-advance after 4s (Ken Burns reaches full zoom)
+  let autoTimer;
+  function startAutoPlay(){
+    clearTimeout(autoTimer);
+    autoTimer=setTimeout(()=>{
+      if(cur<TOTAL-1){ goTo(cur+1); startAutoPlay(); }
+      // On last slide — stay, Ken Burns completes, no loop back
+    },4000);
+  }
+  startAutoPlay();
   document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
 
   // ── DESKTOP: wheel forces through all slides before releasing scroll
