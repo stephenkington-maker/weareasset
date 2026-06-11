@@ -710,6 +710,7 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
   .hc-t1 span,.hc-t2 span{font-size:clamp(36px,10vw,60px)}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -1086,19 +1087,15 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 <script>
 // ── SMOOTH SCROLL
   const lenis = new Lenis({
-    duration: 0.7,
+    duration: 1.2,
     easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    wheelMultiplier: 1.2,
-    touchMultiplier: 1.5,
+    wheelMultiplier: 0.8,
   });
   function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
-  // Use lenis scroll value directly for consistency — avoids double-firing
-  lenis.on('scroll', ({scroll}) => {
-    window._lenisScroll = scroll;
-    window.dispatchEvent(new CustomEvent('lenis-scroll', {detail:{scroll}}));
-  });
+  // Pass lenis scroll to our scroll listeners
+  lenis.on('scroll', () => window.dispatchEvent(new Event('scroll')));
 
 // ── CURSOR
 const cd=document.getElementById('cur-d'),cr=document.getElementById('cur-r');
@@ -1114,7 +1111,6 @@ document.addEventListener('mouseenter',()=>{cd.style.opacity='1';cr.style.opacit
 
 // ── NAV
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40),{passive:true});
-  window.addEventListener('lenis-scroll',e=>document.getElementById('nav').classList.toggle('scrolled',e.detail.scroll>40),{passive:true});
 
 // ── HERO CAROUSEL
 (function(){
