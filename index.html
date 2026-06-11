@@ -1175,14 +1175,16 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
     else if(goingUp&&cur>0){ e.preventDefault(); wLock=true; setTimeout(()=>wLock=false,700); goTo(cur-1); }
   },{passive:false});
 
-  // Scroll fallback for trackpads
-  window.addEventListener('scroll',()=>{
-    const top=-lock.getBoundingClientRect().top;
-    const h=lock.offsetHeight-window.innerHeight;
-    if(h<=0) return;
-    const p=Math.max(0,Math.min(.9999,top/h));
-    goTo(Math.floor(p*TOTAL));
-  },{passive:true});
+  // Scroll fallback — desktop/trackpad only (not touch)
+  if(!('ontouchstart' in window) || window.matchMedia('(pointer:fine)').matches){
+    window.addEventListener('scroll',()=>{
+      const top=-lock.getBoundingClientRect().top;
+      const h=lock.offsetHeight-window.innerHeight;
+      if(h<=0) return;
+      const p=Math.max(0,Math.min(.9999,top/h));
+      goTo(Math.floor(p*TOTAL));
+    },{passive:true});
+  }
 
   // Touch — vertical swipe up/down to advance slides
   let tx=0,ty=0,tLock=false;
