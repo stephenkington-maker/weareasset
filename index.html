@@ -462,6 +462,16 @@ body.menu-is-open .menu-email{display:block}
 /* ════════════════════════════════════
    SERVICES
 ════════════════════════════════════ */
+#services::before{
+  content:'';
+  position:absolute;inset:0;
+  background:url('slide1-bg.jpg') center center / cover no-repeat;
+  filter:blur(28px) brightness(.18) saturate(.6);
+  transform:scale(1.08);
+  z-index:0;
+  pointer-events:none;
+}
+#services .services-inner{position:relative;z-index:1}
 #services{padding:140px 48px;background:var(--surface)}
 .services-inner{max-width:1440px;margin:0 auto}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
@@ -903,7 +913,7 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
 </section>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" style="position:relative;overflow:hidden">
   <div class="services-inner">
     <div class="sec-header">
       <div>
