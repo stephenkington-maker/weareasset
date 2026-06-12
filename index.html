@@ -551,6 +551,8 @@ body.menu-is-open .menu-email{display:block}
 .case-item:hover .case-visual{transform:scale(1.04)}
 .case-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:36px 44px;background:linear-gradient(to top,rgba(13,12,10,.88) 0%,rgba(13,12,10,.2) 50%,transparent 70%);opacity:0;transition:opacity .4s var(--ease)}
 .case-item:hover .case-overlay{opacity:1}
+a.case-item{display:block;color:inherit;text-decoration:none}
+.case-link-hint{display:inline-block;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--olive)}
 .case-client{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive);margin-bottom:6px}
 .case-title-txt{font-family:var(--fs);font-size:clamp(18px,2.2vw,32px);font-style:italic;font-weight:400;line-height:1.1;max-width:480px;color:var(--white)}
 .case-label{position:absolute;top:24px;right:32px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer);padding:6px 12px;border:1px solid var(--border);border-radius:1px;background:rgba(13,12,10,.6);backdrop-filter:blur(8px)}
@@ -1105,11 +1107,11 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
     <div class="work-track-outer" id="wt-outer">
       <div class="work-track" id="wt-track">
         <div style="flex:0 0 0px"></div>
-        <div class="case-item">
+        <a class="case-item" href="work-clickprice.html" aria-label="View Click Price case study">
           <div class="case-visual"><div class="case-bg" style="background:url('project1.jpg') center/cover no-repeat"></div></div>
           <span class="case-label">UI Design</span>
-          <div class="case-overlay"><p class="case-client">Click Price</p><h3 class="case-title-txt">Interactive door builder, a bespoke UI allowing customers to build, customise and buy in real time.</h3></div>
-        </div>
+          <div class="case-overlay"><p class="case-client">Click Price</p><h3 class="case-title-txt">Interactive door builder, a bespoke UI allowing customers to build, customise and buy in real time.</h3><span class="case-link-hint">Read case study →</span></div>
+        </a>
         <div class="case-item small">
           <div class="case-visual"><div class="case-bg" style="background:url('brochure.jpg') center/cover no-repeat"></div></div>
           <span class="case-label">Print Design</span>

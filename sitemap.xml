@@ -9,4 +9,10 @@
     <xhtml:link rel="alternate" hreflang="en-gb" href="https://weareasset.co.uk/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://weareasset.co.uk/"/>
   </url>
+  <url>
+    <loc>https://weareasset.co.uk/work-clickprice.html</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
