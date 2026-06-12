@@ -457,7 +457,11 @@ body.menu-is-open .menu-email{display:block}
 .about-body{font-size:15px;font-weight:300;line-height:1.8;color:var(--dim);max-width:480px}
 .about-line{width:40px;height:2px;background:var(--olive);margin:28px 0}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.stat-card{padding:36px 32px;background:var(--surface);border:1px solid var(--border);transition:border-color .3s,background .3s}
+.stat-card{padding:36px 32px;background:var(--surface);border:1px solid var(--border);transition:border-color .3s,background .3s;position:relative}
+.stat-corner-icon{position:absolute;top:24px;right:24px;width:22px;height:22px;color:var(--olive);opacity:.5;transition:opacity .3s}
+.stat-card:hover .stat-corner-icon{opacity:.9}
+.stat-corner-icon svg{width:100%;height:100%}
+#about .stat-corner-icon{color:var(--olive2)}
 .stat-card:hover{border-color:var(--olive);background:var(--surface2)}
 .stat-card::before{content:'';display:block;width:0;height:2px;background:var(--olive);margin-bottom:20px;transition:width .6s var(--ease)}
 .stat-card.visible::before{width:32px}
@@ -940,10 +944,10 @@ footer{border-top:1px solid var(--border);padding:60px 48px;display:grid;grid-te
     <p class="about-body reveal rd2">ASSET is a boutique creative studio operating at the intersection of strategy and visual culture. Every mark we make has intent, every campaign a singular goal: to make your brand the one they remember.</p>
   </div>
   <div class="about-stats">
-    <div class="stat-card reveal"><div class="stat-num">140<sup>+</sup></div><div class="stat-label">Projects Delivered</div></div>
-    <div class="stat-card reveal rd1"><div class="stat-num">98<sup>%</sup></div><div class="stat-label">Client Retention</div></div>
-    <div class="stat-card reveal rd2"><div class="stat-num">15<sup>yr</sup></div><div class="stat-label">Multi-Discipline Experience</div></div>
-    <div class="stat-card reveal rd3"><div class="stat-num">3<sup>×</sup></div><div class="stat-label">Avg Revenue Lift</div></div>
+    <div class="stat-card reveal"><div class="stat-num">140<sup>+</sup></div><div class="stat-label">Projects Delivered</div><div class="stat-corner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="3" y1="12" x2="21" y2="12"/></svg></div></div>
+    <div class="stat-card reveal rd1"><div class="stat-num">98<sup>%</sup></div><div class="stat-label">Client Retention</div><div class="stat-corner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div></div>
+    <div class="stat-card reveal rd2"><div class="stat-num">15<sup>yr</sup></div><div class="stat-label">Multi-Discipline Experience</div><div class="stat-corner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+    <div class="stat-card reveal rd3"><div class="stat-num">3<sup>×</sup></div><div class="stat-label">Avg Revenue Lift</div><div class="stat-corner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div></div>
   </div>
 </section>
 
