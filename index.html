@@ -278,12 +278,7 @@ body.menu-is-open .menu-email{display:block}
 }
 
 /* ── TOP RIGHT TAG (like reference top-right info box) ── */
-.hc-tag{
-  position:absolute;top:calc(var(--nav-h) + 24px);right:40px;
-  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
-  opacity:0;transform:translateY(-10px);
-  transition:opacity .6s var(--ease) .5s,transform .6s var(--ease) .5s;
-}
+.hc-tag{display:none}
 .hc-slide.active .hc-tag{opacity:1;transform:translateY(0)}
 .hc-tag-box{
   display:flex;align-items:center;gap:10px;
